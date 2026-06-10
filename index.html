@@ -1,714 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Georges Birangou — AI & Data Engineer</title>
+  <title>Georges Birangou Portfolio</title>
   <meta name="description" content="AI & Data Engineer. On-premise LLMs, RAG architectures, big data pipelines.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-
-    :root {
-      --cream:     #F1EDE4;
-      --cream-2:   #EAE5DA;
-      --ink:       #111111;
-      --ink-2:     #2A2A2A;
-      --muted:     #6B6660;
-      --rule:      #1a1a1a;
-      --blue:      #1E58EB;
-      --blue-soft: #4A7BF0;
-    }
-
-    body {
-      margin: 0;
-      background: var(--cream);
-      color: var(--ink);
-      font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
-      font-size: 16px;
-      line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px);
-      background-size: 3px 3px;
-      mix-blend-mode: multiply;
-      opacity: .35;
-      pointer-events: none;
-      z-index: 50;
-    }
-
-    h1, h2 { font-family: 'Geist', ui-sans-serif, sans-serif; font-weight: 500; }
-    .it     { font-family: 'Instrument Serif', serif; font-style: italic; letter-spacing: -.01em; }
-    .row    { display: block; }
-    .accent { color: var(--blue); }
-
-    /* ===== NAV ===== */
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 28px 56px;
-      border-bottom: 1px solid rgba(17,17,17,.12);
-      background: var(--cream);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-    }
-    .nav-dot {
-      width: 8px; height: 8px;
-      background: var(--blue);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .nav ul {
-      display: flex;
-      list-style: none;
-      margin: 0; padding: 0;
-      gap: 36px;
-      align-items: center;
-    }
-    .nav a {
-      font-family: 'Geist', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--ink);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .nav a:hover { color: var(--blue); }
-    .nav-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      margin-right: 6px;
-    }
-    .btn-nav {
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: 1px solid var(--ink);
-      background: transparent;
-      font-family: 'Geist', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink);
-      cursor: pointer;
-      text-decoration: none;
-      transition: .2s ease;
-    }
-    .btn-nav:hover { background: var(--ink); color: var(--cream); }
-
-    /* ===== HERO ===== */
-    .hero {
-      position: relative;
-      min-height: calc(100vh - 86px);
-      padding: 64px 56px 56px;
-      background: var(--cream);
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('assets/hero-bg.png') center right / cover no-repeat;
-      opacity: .7;
-      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: scale(1.06);
-    }
-    .hero-bg.in { transform: scale(1); }
-    .hero-fade {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(241,237,228,.96) 40%, rgba(241,237,228,0) 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 720px) 1fr;
-      gap: 48px;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-right { position: relative; }
-
-    h1 {
-      font-size: clamp(56px, 7.2vw, 124px);
-      font-weight: 500;
-      line-height: .95;
-      letter-spacing: -.035em;
-      margin: 28px 0;
-    }
-    .lead {
-      font-size: 18px;
-      color: var(--ink-2);
-      max-width: 520px;
-      line-height: 1.6;
-    }
-    .lead b { font-weight: 600; color: var(--ink); }
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
-    .hero-meta {
-      display: grid;
-      grid-template-columns: repeat(4, max-content);
-      gap: 40px;
-      margin-top: 40px;
-    }
-    .meta-label {
-      display: block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    .meta-val { font-size: 14px; font-weight: 500; color: var(--ink); }
-
-    .card {
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(17,17,17,.1);
-      border-radius: 14px;
-      padding: 14px 16px;
-      box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 18px 40px -24px rgba(0,0,0,.25);
-      position: absolute;
-    }
-    .card-building { top: 40px; right: 20px; min-width: 220px; display: flex; align-items: center; }
-    .card-toolbox  { top: 160px; right: 20px; min-width: 260px; }
-    .card-icon {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--blue);
-      background: rgba(30,88,235,.08);
-      border: 1px solid rgba(30,88,235,.2);
-      border-radius: 6px;
-      padding: 6px 8px;
-      margin-right: 10px;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-    .card-title { font-size: 13px; font-weight: 500; color: var(--ink); }
-    .card-sub   { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .card-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(17,17,17,.18);
-      backdrop-filter: blur(4px);
-      background: rgba(255,255,255,.5);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--ink-2);
-    }
-    .pulse {
-      width: 7px; height: 7px;
-      background: #15C46E;
-      border-radius: 50%;
-      animation: pulse-anim 2.2s infinite ease-in-out;
-    }
-    @keyframes pulse-anim {
-      50% { box-shadow: 0 0 0 7px rgba(21,196,110,0); }
-    }
-
-    .corner {
-      position: absolute;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px; letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      z-index: 2;
-    }
-    .corner.tl { top: 24px; left: 24px; }
-    .corner.bl { bottom: 24px; left: 24px; }
-    .corner.br { bottom: 24px; right: 24px; }
-
-    .crosshair { position: absolute; width: 12px; height: 12px; z-index: 2; }
-    .crosshair::before {
-      content:''; position:absolute;
-      left:50%; top:0; bottom:0; width:1px;
-      background: rgba(17,17,17,.35);
-    }
-    .crosshair::after {
-      content:''; position:absolute;
-      top:50%; left:0; right:0; height:1px;
-      background: rgba(17,17,17,.35);
-    }
-
-    /* ===== BUTTONS ===== */
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 14px 22px; border-radius: 999px;
-      background: var(--ink); color: var(--cream);
-      border: 1px solid var(--ink);
-      font-family: 'Geist', sans-serif; font-size: 14px; font-weight: 500;
-      text-decoration: none; transition: .2s ease;
-    }
-    .btn-primary:hover { background: var(--blue); border-color: var(--blue); }
-    .btn-primary .arr { transition: transform .2s ease; }
-    .btn-primary:hover .arr { transform: translate(2px,-2px); }
-
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 14px 22px; border-radius: 999px;
-      background: transparent; color: var(--ink);
-      border: 1px solid rgba(17,17,17,.25);
-      font-family: 'Geist', sans-serif; font-size: 14px; font-weight: 500;
-      text-decoration: none; transition: .2s ease;
-    }
-    .btn-ghost:hover { border-color: var(--ink); background: rgba(255,255,255,.5); }
-
-    .btn-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 10px 18px; border-radius: 999px;
-      border: 1px solid rgba(17,17,17,.18); background: transparent;
-      font-size: 13px; font-weight: 500; color: var(--ink);
-      text-decoration: none; transition: .2s ease;
-    }
-    .btn-pill:hover { background: var(--cream-2); }
-
-    /* ===== CHIPS ===== */
-    .chip {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; padding: 4px 8px;
-      background: #fff; border: 1px solid rgba(17,17,17,.12);
-      border-radius: 6px; color: var(--ink-2); white-space: nowrap;
-    }
-    .chip.b { color: var(--blue); border-color: rgba(30,88,235,.3); background: rgba(30,88,235,.05); }
-    .chips  { display: flex; gap: 6px; flex-wrap: wrap; }
-
-    /* ===== TICKER ===== */
-    .ticker {
-      border-top: 1px solid rgba(17,17,17,.12);
-      border-bottom: 1px solid rgba(17,17,17,.12);
-      padding: 14px 0; overflow: hidden; background: var(--cream);
-    }
-    .ticker .track {
-      display: flex; gap: 48px; white-space: nowrap;
-      animation: scroll 38s linear infinite;
-    }
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .ticker .track span {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--ink-2);
-    }
-    .ticker .sep { color: var(--blue); }
-
-    /* ===== KICKER ===== */
-    .kicker { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
-    .ln { width: 36px; height: 1px; background: var(--ink); flex-shrink: 0; }
-    .kicker-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--muted);
-    }
-    h2 {
-      font-size: clamp(44px, 5.5vw, 88px);
-      font-weight: 500; line-height: .95;
-      letter-spacing: -.03em; margin: 0 0 64px;
-    }
-
-    /* ===== WORK ===== */
-    .work { background: var(--cream); padding: 120px 56px; }
-    .work-header {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 40px; margin-bottom: 0; align-items: end;
-    }
-    .project { margin-bottom: 140px; }
-    .project-meta {
-      display: grid;
-      grid-template-columns: 80px 1fr 1fr auto;
-      gap: 32px; align-items: center;
-      padding: 20px 0;
-      border-top: 1px solid rgba(17,17,17,.1);
-      border-bottom: 1px solid rgba(17,17,17,.1);
-      margin-bottom: 32px;
-    }
-    .project-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px; color: var(--muted); letter-spacing: .06em;
-    }
-    .project-title { font-size: 18px; font-weight: 500; margin-bottom: 6px; }
-    .project-role {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: .06em;
-      text-transform: uppercase; color: var(--muted);
-    }
-    .chips-row { display: flex; gap: 6px; flex-wrap: wrap; }
-    .project-link {
-      font-size: 13px; font-weight: 500;
-      color: var(--blue); text-decoration: none; white-space: nowrap;
-    }
-    .project-link:hover { text-decoration: underline; }
-    .project-desc {
-      font-size: 15px; color: var(--ink-2);
-      line-height: 1.65; margin-bottom: 28px; max-width: 740px;
-    }
-
-    .pframe {
-      width: 100%; border-radius: 18px;
-      border: 1px solid rgba(17,17,17,.1);
-      box-shadow: 0 30px 60px -30px rgba(0,0,0,.18);
-      overflow: hidden; position: relative;
-      transition: transform .4s cubic-bezier(.2,.7,.2,1);
-    }
-    .pframe:hover { transform: translateY(-4px); }
-    .pframe img { width: 100%; height: auto; display: block; }
-    .pframe.dark { background: #0a0a0a; }
-    .pframe.pink { background: #FDE5EE; }
-
-    .pframe-ph {
-      width: 100%; aspect-ratio: 16/7;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-    }
-    .pframe:not(.dark) .pframe-ph { color: rgba(17,17,17,.18); background: var(--cream-2); }
-    .pframe.dark .pframe-ph { color: rgba(255,255,255,.12); }
-
-    .pbadge {
-      position: absolute; top: 16px; left: 16px;
-      background: rgba(255,255,255,.92); backdrop-filter: blur(6px);
-      border-radius: 999px; padding: 6px 14px;
-      font-size: 12px; font-weight: 500; color: var(--ink);
-      opacity: 0; transform: translateY(-6px);
-      transition: all .3s ease;
-    }
-    .pframe:hover .pbadge { opacity: 1; transform: translateY(0); }
-
-    .work-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 40px; border-top: 1px solid rgba(17,17,17,.12);
-      margin-top: 0;
-    }
-    .work-footer-quote {
-      font-family: 'Instrument Serif', serif;
-      font-style: italic; font-size: 28px; color: var(--ink-2);
-    }
-
-    /* ===== ABOUT ===== */
-    .about {
-      background: var(--ink); color: var(--cream);
-      padding: 120px 56px; position: relative;
-    }
-    .about::before {
-      content: ""; position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 3px 3px; opacity: .5; pointer-events: none;
-    }
-    .about .ln { background: var(--cream); }
-    .about .kicker-label { color: rgba(241,237,228,.5); }
-    .about h2 { color: var(--cream); }
-
-    .about-grid {
-      display: grid; grid-template-columns: 460px 1fr;
-      gap: 80px; position: relative;
-    }
-    .portrait { position: sticky; top: 40px; align-self: start; }
-    .portrait img {
-      width: 100%; border-radius: 12px;
-      filter: grayscale(.15) contrast(1.02); display: block;
-      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: scale(1.04);
-    }
-    .portrait.in img { transform: scale(1); }
-    .portrait-placeholder {
-      width: 100%; aspect-ratio: 3/4;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: .1em;
-      color: rgba(241,237,228,.25); text-transform: uppercase;
-    }
-    .portrait-caption {
-      font-family: 'Instrument Serif', serif;
-      font-style: italic; font-size: 16px;
-      color: rgba(241,237,228,.55); margin-top: 12px;
-    }
-
-    .quick-cards {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 12px; margin-bottom: 40px;
-    }
-    .qcard {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 10px; padding: 16px;
-    }
-    .qcard-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px; letter-spacing: .1em;
-      text-transform: uppercase; color: rgba(241,237,228,.4); margin-bottom: 6px;
-    }
-    .qcard-val { font-size: 14px; font-weight: 500; color: var(--cream); }
-
-    .bio { font-size: 16px; color: rgba(241,237,228,.75); line-height: 1.7; margin-bottom: 24px; }
-
-    .capabilities {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 12px; margin-top: 40px;
-    }
-    .cap-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 10px; padding: 20px;
-    }
-    .cap-title { font-size: 14px; font-weight: 500; color: var(--cream); }
-    .cap-desc  { font-size: 13px; color: rgba(241,237,228,.55); margin-top: 4px; }
-
-    .timeline { margin-top: 48px; }
-    .timeline-item {
-      display: flex; gap: 24px; padding: 20px 0;
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-    .tl-date {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--blue); min-width: 60px;
-    }
-    .tl-content { font-size: 14px; color: rgba(241,237,228,.7); }
-    .tl-title   { font-weight: 500; color: var(--cream); margin-bottom: 2px; }
-
-    /* ===== TOOLKIT ===== */
-    .toolkit { background: var(--cream); padding: 120px 56px; }
-    .toolkit-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    }
-    .tool-category {
-      background: rgba(255,255,255,.6);
-      border: 1px solid rgba(17,17,17,.1);
-      border-radius: 12px; padding: 24px;
-    }
-    .tool-cat-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
-    }
-    .tool-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 0; border-bottom: 1px solid rgba(17,17,17,.06);
-    }
-    .tool-row:last-child { border-bottom: none; }
-    .tool-name  { font-size: 14px; font-weight: 500; color: var(--ink); }
-    .tool-stars { color: var(--blue); font-size: 12px; letter-spacing: 2px; }
-    .tool-stars .grey { color: rgba(17,17,17,.2); }
-
-    /* ===== CONTACT ===== */
-    .contact {
-      background: var(--ink); color: var(--cream);
-      padding: 120px 56px; position: relative;
-    }
-    .contact::before {
-      content: ""; position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 3px 3px; opacity: .5; pointer-events: none;
-    }
-    .contact .ln { background: var(--cream); }
-    .contact .kicker-label { color: rgba(241,237,228,.5); }
-    .contact h2 { color: var(--cream); }
-
-    .contact-sublabel {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: rgba(241,237,228,.4); margin-bottom: 10px;
-    }
-    .contact-email {
-      font-size: clamp(20px, 2.5vw, 32px);
-      font-weight: 500; color: var(--cream);
-    }
-    .copy-email {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 10px 18px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.2); background: transparent;
-      font-family: 'Geist', sans-serif; font-size: 13px; font-weight: 500;
-      color: var(--cream); cursor: pointer; transition: .2s ease; margin-left: 16px;
-    }
-    .copy-email:hover { background: rgba(255,255,255,.08); }
-
-    .channels {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 16px; margin: 48px 0;
-    }
-    .channel-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px; padding: 20px;
-      text-decoration: none; color: var(--cream); transition: .2s ease;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .channel-card:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.15); }
-    .channel-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-    .channel-handle { font-size: 13px; color: rgba(241,237,228,.5); }
-
-    .qr-img { width: 52px; height: 52px; border-radius: 6px; object-fit: cover; }
-    .qr-ph {
-      width: 52px; height: 52px; border-radius: 6px;
-      background: rgba(255,255,255,.1);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px; color: rgba(241,237,228,.3); text-align: center;
-    }
-
-    .contact-cards {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px; max-width: 600px;
-    }
-    .cv-card {
-      background: var(--cream); color: var(--ink);
-      border-radius: 12px; padding: 20px 24px;
-      font-weight: 500; font-size: 15px;
-      text-decoration: none; transition: .2s ease; display: block;
-    }
-    .cv-card:hover { background: var(--cream-2); }
-    .loc-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px; padding: 20px 24px;
-      font-size: 14px; color: rgba(241,237,228,.6);
-    }
-    .loc-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
-      color: rgba(241,237,228,.35); margin-bottom: 6px;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      padding: 28px 56px; border-top: 1px solid rgba(255,255,255,.08);
-      display: flex; justify-content: space-between; align-items: center;
-      background: var(--ink);
-    }
-    footer span, footer a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: .08em;
-      text-transform: uppercase; color: rgba(241,237,228,.4); text-decoration: none;
-    }
-    footer a:hover { color: var(--cream); }
-    .footer-links { display: flex; gap: 24px; }
-
-    /* ===== ANIMATIONS ===== */
-    .hero-anim {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: heroIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .hero-anim.d1 { animation-delay: .10s; }
-    .hero-anim.d2 { animation-delay: .25s; }
-    .hero-anim.d3 { animation-delay: .40s; }
-    .hero-anim.d4 { animation-delay: .55s; }
-    .hero-anim.d5 { animation-delay: .70s; }
-    .hero-anim.d6 { animation-delay: .85s; }
-    .hero-anim.d7 { animation-delay: 1.00s; }
-    @keyframes heroIn { to { opacity: 1; transform: none; } }
-
-    h1 .it.hero-anim {
-      display: inline-block;
-      transform: translateY(20px) translateX(-4px);
-    }
-
-    [data-anim] {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1);
-    }
-    [data-anim].visible { opacity: 1; transform: none; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-anim, [data-anim], .portrait img {
-        opacity: 1 !important; transform: none !important;
-        animation: none !important; transition: none !important;
-      }
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 1100px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      .hero-bg { opacity: .55; }
-      .hero { padding: 64px 32px 56px; }
-      .work, .toolkit { padding: 80px 32px; }
-      .about, .contact { padding: 80px 32px; }
-      .about-grid { grid-template-columns: 1fr; }
-      .portrait { position: static; }
-      .toolkit-grid { grid-template-columns: repeat(2, 1fr); }
-      .channels { grid-template-columns: repeat(2, 1fr); }
-      .nav { padding: 28px 32px; }
-    }
-
-    @media (max-width: 720px) {
-      .nav ul { display: none; }
-      .nav { padding: 22px 24px; }
-      .hero { padding: 48px 24px 40px; }
-      .work, .toolkit { padding: 60px 24px; }
-      .about, .contact { padding: 60px 24px; }
-      h1 { font-size: clamp(40px, 11vw, 72px); }
-      h2 { font-size: clamp(36px, 9vw, 60px); }
-      .hero-meta { grid-template-columns: repeat(2, max-content); gap: 24px 32px; }
-      .project-meta { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .contact-cards { grid-template-columns: 1fr; }
-      footer { padding: 24px; }
-    }
-
-    @media (max-width: 600px) {
-      .toolkit-grid { grid-template-columns: 1fr !important; }
-      .channels { grid-template-columns: 1fr 1fr; }
-      .footer-links { display: none; }
-      .capabilities { grid-template-columns: 1fr; }
-      .quick-cards { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <!-- NAV -->
   <nav class="nav">
-    <a href="#home" class="nav-brand">
-      <span class="nav-dot"></span>
-      GEORGES BIRANGOU
-    </a>
+    <div class="nav-controls">
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="fr">FR</button>
+      </div>
+      <button class="theme-btn" id="theme-btn" aria-label="Toggle theme"></button>
+    </div>
     <ul>
-      <li><a href="#work"><span class="nav-num">01</span>Work</a></li>
-      <li><a href="#about"><span class="nav-num">02</span>About</a></li>
-      <li><a href="#toolkit"><span class="nav-num">03</span>Toolkit</a></li>
+      <li><a href="#work"><span class="nav-num">01</span><span class="en">Work</span><span class="fr">Projets</span></a></li>
+      <li><a href="#about"><span class="nav-num">02</span><span class="en">About</span><span class="fr">À propos</span></a></li>
+      <li><a href="#toolkit"><span class="nav-num">03</span><span class="en">Toolkit</span><span class="fr">Compétences</span></a></li>
       <li><a href="#contact"><span class="nav-num">04</span>Contact</a></li>
-      <li><a href="#contact" class="btn-nav">Let's talk →</a></li>
     </ul>
   </nav>
 
@@ -717,41 +36,32 @@
     <div class="hero-bg"></div>
     <div class="hero-fade"></div>
 
-    <div class="corner tl">CASABLANCA → REMOTE · 33.5731°N 7.5898°W</div>
-    <div class="corner bl">[ PORTFOLIO / 2026 — V.01 ]</div>
-    <div class="corner br">SCROLL ↓</div>
-    <div class="crosshair" style="top:24px;right:24px"></div>
-
     <div class="hero-grid">
       <div class="hero-left">
-        <div class="eyebrow hero-anim d1">
-          <span class="pulse"></span>
-          AVAILABLE FOR NEW PROJECTS · Q3 2026
-        </div>
-
-        <h1 class="hero-anim d2">
+        <h1 class="hero-anim d1">
           <span class="row">Georges</span>
-          <span class="row"><span class="it hero-anim d2">Birangou.</span></span>
+          <span class="row"><span class="it hero-anim d1">Birangou.</span></span>
         </h1>
 
-        <p class="lead hero-anim d3">
-          AI &amp; Data Engineer crafting on-premise LLM pipelines, RAG architectures,
-          and data systems that work <b>where the cloud can't go.</b>
+        <p class="hero-quote hero-anim d2">
+          <span class="en">"Bridging data and AI, where solid pipelines meet intelligence."</span>
+          <span class="fr">« À la croisée de la data et de l'IA, là où des pipelines solides rencontrent l'intelligence. »</span>
         </p>
 
-        <div class="actions hero-anim d4">
-          <a href="#work" class="btn-primary">View selected work <span class="arr">↗</span></a>
+        <div class="actions hero-anim d3">
+          <a href="assets/Georges_Birangou.pdf" target="_blank" rel="noopener" class="btn-primary en">View CV <span class="arr">↗</span></a>
+          <a href="assets/Georges%20Birangou.pdf" target="_blank" rel="noopener" class="btn-primary fr">Voir le CV <span class="arr">↗</span></a>
           <a href="mailto:Ge.birangou.26@eigsica.ma" class="btn-ghost">Ge.birangou.26@eigsica.ma</a>
         </div>
 
-        <div class="hero-meta hero-anim d5">
+        <div class="hero-meta hero-anim d4">
           <div class="meta-item">
-            <span class="meta-label">ROLE</span>
-            <span class="meta-val">AI &amp; Data Engineer</span>
+            <span class="meta-label"><span class="en">ROLE</span><span class="fr">RÔLE</span></span>
+            <span class="meta-val"><span class="en">AI &amp; Data Engineer</span><span class="fr">Ingénieur IA &amp; Data</span></span>
           </div>
           <div class="meta-item">
             <span class="meta-label">FOCUS</span>
-            <span class="meta-val">LLM · RAG · Big Data</span>
+            <span class="meta-val">Data Engineering · LLM · RAG</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">STATUS</span>
@@ -759,31 +69,11 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">STACK</span>
-            <span class="meta-val">Python · Next.js · SQL</span>
+            <span class="meta-val">Python · SQL · LangChain</span>
           </div>
         </div>
       </div>
 
-      <div class="hero-right hero-anim d6">
-        <div class="card card-building">
-          <div class="card-icon">&lt;/&gt;</div>
-          <div>
-            <div class="card-title">Currently Building</div>
-            <div class="card-sub">Jobby Joe — AI job platform</div>
-          </div>
-        </div>
-        <div class="card card-toolbox hero-anim d7">
-          <div class="card-label">TOOLBOX</div>
-          <div class="chips">
-            <span class="chip b">Python</span>
-            <span class="chip b">LangChain</span>
-            <span class="chip">PyTorch</span>
-            <span class="chip">Next.js</span>
-            <span class="chip">Kafka</span>
-            <span class="chip">Docker</span>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -819,117 +109,130 @@
       <div>
         <div class="kicker">
           <div class="ln"></div>
-          <span class="kicker-label">01 — SELECTED WORK</span>
+          <span class="kicker-label"><span class="en">01 — SELECTED WORK</span><span class="fr">01 — PROJETS SÉLECTIONNÉS</span></span>
         </div>
         <h2>
-          <span class="row">Things I've</span>
-          <span class="row"><span class="it">shipped<span class="accent">.</span></span></span>
+          <span class="row en">A few</span>
+          <span class="row en"><span class="it">builds<span class="accent">.</span></span></span>
+          <span class="row fr">Quelques</span>
+          <span class="row fr"><span class="it">réalisations<span class="accent">.</span></span></span>
         </h2>
       </div>
     </div>
 
-    <!-- Project 01 -->
+    <!-- 01 -->
     <div class="project" data-anim>
-      <div class="project-meta">
-        <span class="project-num">01</span>
+      <div class="project-row">
+        <span class="project-num">/01</span>
         <div>
-          <div class="project-title">ResumeRadar</div>
-          <div class="project-role">AI Engineer · 2026 · Open Source</div>
+          <div class="project-title-line">
+            <span class="project-title">ResumeRadar</span>
+            <span class="project-dash"> — </span><span class="it project-tagline"><span class="en">AI CV Scoring</span><span class="fr">Scoring de CV par IA</span></span>
+          </div>
+          <div class="chips-row">
+            <span class="chip b">Python</span><span class="chip b">Streamlit</span>
+            <span class="chip">Ollama</span><span class="chip">LangChain</span><span class="chip">Llama 3.1</span>
+          </div>
         </div>
-        <div class="chips-row">
-          <span class="chip b">Python</span>
-          <span class="chip b">Streamlit</span>
-          <span class="chip">Ollama</span>
-          <span class="chip">LangChain</span>
-          <span class="chip">Llama 3.1</span>
+        <p class="project-desc">
+          <span class="en">A system that analyzes a stack of CVs and automatically ranks them against a target job description, powered by AI. The recruiter uploads their CVs, pastes the job description, and the AI does the rest.</span>
+          <span class="fr">Un système permettant d'analyser une pile de CVs et de les classer automatiquement selon un poste ciblé, grâce à l'intelligence artificielle. Le recruteur upload ses CVs, colle la description du poste et l'IA fait le reste.</span>
+        </p>
+        <div class="project-right">
+          <div class="proj-meta-row">
+            <span class="proj-meta-key">ROLE</span>
+            <span class="proj-meta-val"><span class="en">AI Engineer</span><span class="fr">Ingénieur IA</span></span>
+          </div>
+          <div class="proj-meta-row">
+            <span class="proj-meta-key">YEAR</span>
+            <span class="proj-meta-val">2026 · Open Source</span>
+          </div>
+          <a href="https://github.com/Gegegithub/ResumeRadar.git" target="_blank" rel="noopener" class="btn-pill">GitHub ↗</a>
         </div>
-        <a href="https://github.com/Gegegithub/ResumeRadar.git" target="_blank" rel="noopener" class="project-link">View on GitHub ↗</a>
       </div>
-      <p class="project-desc">Pipeline 3-stages de tri de CVs 100% local. Bi-encoder embeddings + LLM reranker. 0 donnée vers le cloud.</p>
       <div class="pframe">
         <div class="pbadge">AI / NLP &amp; RAG</div>
-        <div class="pframe-ph">[ ResumeRadar — UI Screenshot ]</div>
+        <img src="assets/resumeradar.png" alt="ResumeRadar">
       </div>
     </div>
 
-    <!-- Project 02 -->
+    <!-- 02 -->
     <div class="project" data-anim>
-      <div class="project-meta">
-        <span class="project-num">02</span>
+      <div class="project-row">
+        <span class="project-num">/02</span>
         <div>
-          <div class="project-title">Fraud Detection Architecture</div>
-          <div class="project-role">Data Engineer · 2025 · Academic</div>
+          <div class="project-title-line">
+            <span class="project-title">Fraud Detection</span>
+            <span class="project-dash"> — </span><span class="it project-tagline"><span class="en">Real-time ML Pipeline</span><span class="fr">Pipeline ML temps réel</span></span>
+          </div>
+          <div class="chips-row">
+            <span class="chip b">Python</span><span class="chip b">XGBoost</span>
+            <span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Grafana</span>
+          </div>
         </div>
-        <div class="chips-row">
-          <span class="chip b">Python</span>
-          <span class="chip b">XGBoost</span>
-          <span class="chip">Kafka</span>
-          <span class="chip">PostgreSQL</span>
-          <span class="chip">Grafana</span>
-          <span class="chip">Docker</span>
+        <p class="project-desc">
+          <span class="en">An end-to-end real-time fraud detection system. A transaction simulator feeds a Kafka stream, consumed by an XGBoost model trained with SMOTE to handle class imbalance. Predictions are stored in PostgreSQL and monitored live through Grafana dashboards.</span>
+          <span class="fr">Un système de détection de fraude bancaire en temps réel. Un simulateur de transactions alimente un flux Kafka, consommé par un modèle XGBoost entraîné avec SMOTE pour gérer le déséquilibre des classes. Les prédictions sont stockées dans PostgreSQL et visualisées en direct via Grafana.</span>
+        </p>
+        <div class="project-right">
+          <div class="proj-meta-row">
+            <span class="proj-meta-key">ROLE</span>
+            <span class="proj-meta-val"><span class="en">Data Engineer</span><span class="fr">Ingénieur Data</span></span>
+          </div>
+          <div class="proj-meta-row">
+            <span class="proj-meta-key">YEAR</span>
+            <span class="proj-meta-val">2025 · Academic</span>
+          </div>
+          <a href="https://github.com/Gegegithub/Bank-fraud-detection.git" target="_blank" rel="noopener" class="btn-pill">GitHub ↗</a>
         </div>
-        <a href="https://github.com/Gegegithub/Bank-fraud-detection.git" target="_blank" rel="noopener" class="project-link">View on GitHub ↗</a>
       </div>
-      <p class="project-desc">Pipeline ML → streaming Kafka temps réel sur 284 807 transactions. 89.8% Recall, ROC-AUC 0.978. Dashboards Grafana live.</p>
       <div class="pframe dark">
         <div class="pbadge">ML / Big Data</div>
-        <div class="pframe-ph">[ Fraud Detection — Dashboard Preview ]</div>
+        <img src="assets/bank.png" alt="Fraud Detection Architecture">
       </div>
     </div>
 
-    <!-- Project 03 -->
+    <!-- 03 -->
     <div class="project" data-anim>
-      <div class="project-meta">
-        <span class="project-num">03</span>
+      <div class="project-row">
+        <span class="project-num">/03</span>
         <div>
-          <div class="project-title">RAG Multimodal System</div>
-          <div class="project-role">AI Engineer · 2026 · Personal</div>
+          <div class="project-title-line">
+            <span class="project-title">RAG Multimodal</span>
+            <span class="project-dash"> — </span><span class="it project-tagline"><span class="en">Document Search Engine</span><span class="fr">Moteur de recherche documentaire</span></span>
+          </div>
+          <div class="chips-row">
+            <span class="chip b">Python</span><span class="chip b">Gemini</span>
+            <span class="chip">pgvector</span><span class="chip">PostgreSQL</span><span class="chip">Streamlit</span>
+          </div>
         </div>
-        <div class="chips-row">
-          <span class="chip b">Python</span>
-          <span class="chip b">Gemini</span>
-          <span class="chip">pgvector</span>
-          <span class="chip">PostgreSQL</span>
-          <span class="chip">Streamlit</span>
-          <span class="chip">Docker</span>
+        <p class="project-desc">
+          <span class="en">A RAG system that indexes PDFs and images and answers natural language questions about them. Documents are chunked, embedded via Gemini (768 dims), and stored in pgvector. At query time, the top 5 relevant chunks are retrieved and sent to Gemini Flash to generate a sourced answer.</span>
+          <span class="fr">Un système RAG qui indexe des PDFs et des images et répond à des questions en langage naturel. Les documents sont découpés, vectorisés via Gemini (768 dims) et stockés dans pgvector. À chaque requête, les 5 chunks les plus pertinents sont récupérés et envoyés à Gemini Flash pour générer une réponse sourcée.</span>
+        </p>
+        <div class="project-right">
+          <div class="proj-meta-row">
+            <span class="proj-meta-key">ROLE</span>
+            <span class="proj-meta-val"><span class="en">AI Engineer</span><span class="fr">Ingénieur IA</span></span>
+          </div>
+          <div class="proj-meta-row">
+            <span class="proj-meta-key">YEAR</span>
+            <span class="proj-meta-val">2026 · Personal</span>
+          </div>
+          <a href="https://github.com/Gegegithub/Rag-Multimodal" target="_blank" rel="noopener" class="btn-pill">GitHub ↗</a>
         </div>
-        <a href="https://github.com/Gegegithub/Rag-Multimodal" target="_blank" rel="noopener" class="project-link">View on GitHub ↗</a>
       </div>
-      <p class="project-desc">Moteur de recherche sur documents personnels (PDFs + images). Embeddings Gemini 768 dims + recherche vectorielle pgvector.</p>
       <div class="pframe">
         <div class="pbadge">AI / RAG</div>
-        <div class="pframe-ph">[ RAG Multimodal — Interface Preview ]</div>
-      </div>
-    </div>
-
-    <!-- Project 04 -->
-    <div class="project" data-anim>
-      <div class="project-meta">
-        <span class="project-num">04</span>
-        <div>
-          <div class="project-title">IoT Industrial Architecture</div>
-          <div class="project-role">Data Engineer · 2025 · Academic</div>
-        </div>
-        <div class="chips-row">
-          <span class="chip b">Kafka</span>
-          <span class="chip b">Spark</span>
-          <span class="chip">Python</span>
-          <span class="chip">MQTT</span>
-          <span class="chip">TimescaleDB</span>
-          <span class="chip">Grafana</span>
-        </div>
-        <a href="https://github.com/Gegegithub/Raffinerie-iot" target="_blank" rel="noopener" class="project-link">View on GitHub ↗</a>
-      </div>
-      <p class="project-desc">Pipeline IoT temps réel pour raffinerie simulée. 1000+ msg/sec. MQTT → Kafka → Spark → TimescaleDB → Grafana.</p>
-      <div class="pframe dark">
-        <div class="pbadge">Big Data / IoT</div>
-        <div class="pframe-ph">[ IoT Architecture — Pipeline Diagram ]</div>
+        <img src="assets/rag.png" alt="RAG Multimodal System">
       </div>
     </div>
 
     <div class="work-footer" data-anim>
-      <span class="work-footer-quote">More things in the archive.</span>
-      <a href="#contact" class="btn-pill">Get the full archive →</a>
+      <a href="https://github.com/Gegegithub" target="_blank" rel="noopener" class="btn-pill">
+        <span class="en">See more on my GitHub →</span>
+        <span class="fr">Voir plus sur mon GitHub →</span>
+      </a>
     </div>
   </section>
 
@@ -937,196 +240,413 @@
   <section class="about" id="about">
     <div class="kicker" data-anim>
       <div class="ln"></div>
-      <span class="kicker-label">02 — ABOUT</span>
+      <span class="kicker-label"><span class="en">02 — ABOUT</span><span class="fr">02 — À PROPOS</span></span>
     </div>
-    <h2 data-anim>
-      <span class="row">Curious by default,</span>
-      <span class="row">builder by <span class="it">choice<span class="accent">.</span></span></span>
-    </h2>
+
+    <div class="about-header-row" data-anim>
+      <h2>
+        <span class="row en">The person</span>
+        <span class="row en"><span class="it">behind the pipelines<span class="accent">.</span></span></span>
+        <span class="row fr">La personne</span>
+        <span class="row fr"><span class="it">derrière les pipelines<span class="accent">.</span></span></span>
+      </h2>
+      <div class="about-meta-top">
+        <span class="about-est">est. 2003</span>
+        <span class="about-loc">Casablanca, Morocco · GMT+1</span>
+      </div>
+    </div>
+    <div class="about-divider"></div>
 
     <div class="about-grid">
-      <div class="portrait">
-        <img src="assets/photo_cv.jpg" alt="Georges Birangou"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="portrait-placeholder">Photo Portrait</div>
-        <div class="portrait-caption">— hi, I'm Georges.</div>
-      </div>
-
-      <div>
+      <div class="about-left">
+        <div class="portrait">
+          <img src="assets/photo_cv.jpg" alt="Georges Birangou"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="portrait-placeholder">Photo Portrait</div>
+        </div>
         <div class="quick-cards" data-anim>
-          <div class="qcard"><div class="qcard-label">SCHOOL</div><div class="qcard-val">EIGSI Casablanca</div></div>
-          <div class="qcard"><div class="qcard-label">FIELD</div><div class="qcard-val">AI &amp; Data Engineering</div></div>
-          <div class="qcard"><div class="qcard-label">BASED</div><div class="qcard-val">Casablanca, Maroc</div></div>
-          <div class="qcard"><div class="qcard-label">OPEN TO</div><div class="qcard-val">Remote · 2026</div></div>
-        </div>
-
-        <p class="bio" data-anim>
-          5th-year AI &amp; Big Data Engineering student at EIGSI Casablanca (Class of 2026),
-          completing my final internship (PFE) at Cetim Maroc Développement on the
-          Technopole Aéronautique de Nouasser. I build data pipelines and Python desktop
-          applications that automate what used to be done by hand — or not at all.
-        </p>
-        <p class="bio" data-anim>
-          I specialize in on-premise LLMs, RAG architectures, and large-scale data
-          processing. My work lives at the intersection of machine learning and
-          production engineering — fast, reliable, and never dependent on the cloud.
-        </p>
-        <p class="bio" data-anim>
-          Originally from Gabon, based in Casablanca. Targeting Porto in 2027–2028,
-          currently learning European Portuguese. When I'm not shipping, I'm in Blender,
-          building Three.js experiments, or grinding Marvel Rivals.
-        </p>
-
-        <div class="capabilities" data-anim>
-          <div class="cap-card">
-            <div class="cap-title">LLM / RAG Engineering</div>
-            <div class="cap-desc">On-premise pipelines, ChromaDB, pgvector, LangChain</div>
+          <div class="qcard">
+            <div class="qcard-label"><span class="en">SCHOOL</span><span class="fr">ÉCOLE</span></div>
+            <div class="qcard-val">EIGSI Casablanca</div>
           </div>
-          <div class="cap-card">
-            <div class="cap-title">Big Data Architectures</div>
-            <div class="cap-desc">Kafka, Spark Streaming, 1000+ msg/sec systems</div>
+          <div class="qcard">
+            <div class="qcard-label"><span class="en">FIELD</span><span class="fr">DOMAINE</span></div>
+            <div class="qcard-val">AI &amp; Data</div>
           </div>
-          <div class="cap-card">
-            <div class="cap-title">Computer Vision</div>
-            <div class="cap-desc">YOLOv8 detection, U-Net segmentation, Flask APIs</div>
+          <div class="qcard">
+            <div class="qcard-label"><span class="en">BASED</span><span class="fr">BASÉ À</span></div>
+            <div class="qcard-val">Casablanca, Maroc</div>
           </div>
-          <div class="cap-card">
-            <div class="cap-title">Full-Stack Development</div>
-            <div class="cap-desc">Next.js, Django, React Native, Supabase</div>
-          </div>
-          <div class="cap-card">
-            <div class="cap-title">Data Science / ML</div>
-            <div class="cap-desc">XGBoost, Scikit-learn, PyTorch, feature engineering</div>
-          </div>
-          <div class="cap-card">
-            <div class="cap-title">Desktop Applications</div>
-            <div class="cap-desc">PyQt6, PyInstaller, ETL automation, EXE packaging</div>
-          </div>
-        </div>
-
-        <div class="timeline" data-anim>
-          <div class="timeline-item">
-            <span class="tl-date">NOW</span>
-            <div class="tl-content">
-              <div class="tl-title">PFE @ Cetim Maroc</div>
-              Automatisation rapports fatigue HCF (Mars–Sept 2026)
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span class="tl-date">2025</span>
-            <div class="tl-content">
-              <div class="tl-title">Stage Mobile &amp; Analytics — CCIS Casablanca-Settat</div>
-              React Native, Supabase
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span class="tl-date">2024</span>
-            <div class="tl-content">
-              <div class="tl-title">Stage Web — Texefa SARL</div>
-              Django, Python, conf. management platform
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span class="tl-date">2025</span>
-            <div class="tl-content">
-              <div class="tl-title">Oracle Cloud Generative AI Professional Certified</div>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span class="tl-date">2025</span>
-            <div class="tl-content">
-              <div class="tl-title">Oracle Cloud Data Science Professional Certified</div>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span class="tl-date">~2021</span>
-            <div class="tl-content">
-              <div class="tl-title">Entered EIGSI Casablanca</div>
-              AI &amp; Big Data Engineering program
-            </div>
+          <div class="qcard">
+            <div class="qcard-label"><span class="en">OPEN TO</span><span class="fr">OUVERT À</span></div>
+            <div class="qcard-val">Remote</div>
           </div>
         </div>
       </div>
-    </div>
+
+      <div class="about-right">
+        <p class="bio-lead" data-anim>
+          <span class="en">I'm a <strong>Data &amp; AI Engineer</strong> building robust pipelines and intelligent systems, from raw data ingestion to actionable output.</span>
+          <span class="fr">Ingénieur <strong>Data &amp; IA</strong>, je construis des pipelines robustes et des systèmes intelligents, de l'ingestion de données brutes jusqu'à l'intégration de solutions intelligentes.</span>
+        </p>
+
+        <p class="bio" data-anim>
+          <span class="en">Data &amp; AI Engineer proficient in Python, SQL, Apache Kafka, Spark Streaming and PostgreSQL, with a strong specialization in ELT/ETL pipelines, RAG pipelines and local LLM deployment.</span>
+          <span class="fr">Ingénieur Data &amp; AI maîtrisant Python, SQL, Apache Kafka, Spark Streaming et PostgreSQL, avec une spécialisation marquée en pipelines ELT/ETL, pipelines RAG et déploiement de LLM en local.</span>
+        </p>
+        <p class="bio" data-anim>
+          <span class="en">My core strength is building robust data infrastructures for constrained environments: normalizing heterogeneous sources into unified processing layers, ensuring reliable flows from raw data to usable output. On this foundation, I bring a concrete AI dimension by transforming well-structured data into a launch pad for local intelligence — from semantic search to automated analysis, entirely self-contained.</span>
+          <span class="fr">Mon point fort est la construction d'infrastructures de données robustes pour des environnements contraints : normalisation de sources hétérogènes en couches de traitement unifiées, garantissant des flux fiables de la matière brute jusqu'à la sortie exploitable. Sur cette fondation data, j'apporte une dimension IA concrète en transformant des données bien structurées en base de lancement pour l'intelligence locale, de la recherche sémantique à l'analyse automatisée, entièrement auto-contenu.</span>
+        </p>
+
+        <div data-anim>
+          <div class="tl-tabs">
+            <button class="tl-tab active" data-tab="exp"><span class="en">Experience</span><span class="fr">Expériences</span></button>
+            <button class="tl-tab" data-tab="cert">Certifications</button>
+          </div>
+
+          <div class="tl-panel active" id="tl-exp">
+
+            <!-- Cetim Maroc -->
+            <div class="exp-item">
+              <div class="exp-dates">
+                <div class="exp-date-text"><span class="en">Mar 2026</span><span class="fr">Mars 2026</span></div>
+                <span class="exp-date-sep">—</span>
+                <div class="exp-date-text"><span class="en">Sep 2026</span><span class="fr">Sept 2026</span></div>
+                <div class="exp-badge-running"><span class="en">Ongoing</span><span class="fr">En cours</span></div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-company">Cetim Maroc Développement</div>
+                <div class="exp-location"><span class="en">Technopole Aéronautique de Nouasser, Casablanca</span><span class="fr">Technopole Aéronautique de Nouasser, Casablanca</span></div>
+                <div class="exp-role"><span class="en">AI &amp; Data Engineer Intern · Stage PFE</span><span class="fr">Ingénieur IA &amp; Data · Stage PFE</span></div>
+                <ul class="exp-bullets">
+                  <li><span class="en">Multi-source ETL pipeline (MPT, Excel, Access) for automated HCF fatigue test reports</span><span class="fr">Pipeline ETL multi-sources (MPT, Excel, Access) pour l'automatisation des rapports de tests de fatigue HCF</span></li>
+                  <li><span class="en">Strategy/Adapter architecture agnostic to data source</span><span class="fr">Architecture Strategy/Adapter agnostique à la source de données</span></li>
+                  <li><span class="en">PyQt6 desktop app packaged as standalone EXE via PyInstaller</span><span class="fr">Application desktop PyQt6 packagée en EXE standalone via PyInstaller</span></li>
+                  <li><span class="en">Replaced brittle VBA macros with a robust Python system</span><span class="fr">Remplacement de macros VBA fragiles par un système Python robuste</span></li>
+                  <li><span class="en">Automated fatigue parameter calculation (σmax, σmin, R, frequency, cycle count)</span><span class="fr">Calcul automatisé des paramètres fatigue (σmax, σmin, R, fréquence, nb cycles)</span></li>
+                </ul>
+                <div class="chips-row">
+                  <span class="chip">Python</span><span class="chip">PyQt6</span><span class="chip">PyInstaller</span>
+                  <span class="chip">openpyxl</span><span class="chip">pyodbc</span><span class="chip">pandas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- CCIS -->
+            <div class="exp-item">
+              <div class="exp-dates">
+                <div class="exp-date-text"><span class="en">Jun 2025</span><span class="fr">Juin 2025</span></div>
+                <span class="exp-date-sep">—</span>
+                <div class="exp-date-text"><span class="en">Sep 2025</span><span class="fr">Sept 2025</span></div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-company"><span class="en">Casablanca-Settat Chamber of Commerce</span><span class="fr">Chambre de Commerce de Casablanca-Settat</span></div>
+                <div class="exp-location">Casablanca, Maroc</div>
+                <div class="exp-role"><span class="en">Mobile &amp; Analytics Developer · Internship</span><span class="fr">Développeur Mobile &amp; Analytics · Stage</span></div>
+                <ul class="exp-bullets">
+                  <li><span class="en">Cross-platform mobile application for document management</span><span class="fr">Développement d'une application mobile cross-platform de gestion documentaire</span></li>
+                  <li><span class="en">Secure authentication system and permissions management</span><span class="fr">Système d'authentification sécurisé et gestion des permissions</span></li>
+                  <li><span class="en">Intuitive and responsive user interface</span><span class="fr">Interface utilisateur intuitive et responsive</span></li>
+                  <li><span class="en">Supabase integration for real-time synchronization</span><span class="fr">Intégration avec Supabase pour la synchronisation temps réel</span></li>
+                </ul>
+                <div class="chips-row">
+                  <span class="chip">React Native</span><span class="chip">Supabase</span>
+                  <span class="chip">TypeScript</span><span class="chip">REST API</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Texefa -->
+            <div class="exp-item">
+              <div class="exp-dates">
+                <div class="exp-date-text">2024</div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-company">Texefa SARL</div>
+                <div class="exp-location">Casablanca, Maroc</div>
+                <div class="exp-role"><span class="en">Web Developer · Internship</span><span class="fr">Développeur Web · Stage</span></div>
+                <ul class="exp-bullets">
+                  <li><span class="en">Conference management platform built with Django</span><span class="fr">Plateforme de gestion de conférences développée sous Django</span></li>
+                  <li><span class="en">User authentication and role-based access control</span><span class="fr">Système d'authentification et contrôle d'accès par rôles</span></li>
+                  <li><span class="en">Relational database design and integration</span><span class="fr">Conception et intégration d'une base de données relationnelle</span></li>
+                </ul>
+                <div class="chips-row">
+                  <span class="chip">Django</span><span class="chip">Python</span><span class="chip">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="tl-panel" id="tl-cert">
+            <div class="cert-grid">
+
+              <div class="cert-card">
+                <div class="cert-title">Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</div>
+                <div class="cert-year">2025</div>
+                <a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=B4B229857066E30AB9CE0FD3B085663CE2E43F15490D7D5303F00256C178A9F7" class="cert-link" target="_blank" rel="noopener">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <span class="en">View certification</span><span class="fr">Voir la certification</span>
+                </a>
+              </div>
+
+              <div class="cert-card">
+                <div class="cert-title">Oracle Cloud Infrastructure 2025 Certified Data Science Professional</div>
+                <div class="cert-year">2025</div>
+                <a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=8AC1757450096840202B44FF742EB543DB532953AFE7F8B626B2A09D62878A80" class="cert-link" target="_blank" rel="noopener">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <span class="en">View certification</span><span class="fr">Voir la certification</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- about-right -->
+    </div><!-- about-grid -->
   </section>
 
   <!-- TOOLKIT -->
   <section class="toolkit" id="toolkit">
     <div class="kicker" data-anim>
       <div class="ln"></div>
-      <span class="kicker-label">03 — TOOLKIT</span>
+      <span class="kicker-label"><span class="en">03 — TOOLKIT</span><span class="fr">03 — COMPÉTENCES</span></span>
     </div>
     <h2 data-anim>
-      <span class="row">Tools I reach for</span>
-      <span class="row"><span class="it">on the daily<span class="accent">.</span></span></span>
+      <span class="row en">What I</span>
+      <span class="row en"><span class="it">build with<span class="accent">.</span></span></span>
+      <span class="row fr">Ce avec quoi</span>
+      <span class="row fr"><span class="it">je construis<span class="accent">.</span></span></span>
     </h2>
 
-    <div class="toolkit-grid" data-anim>
-      <div class="tool-category">
-        <div class="tool-cat-title">Languages</div>
-        <div class="tool-row"><span class="tool-name">Python</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">TypeScript</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">SQL</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">JavaScript</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
+    <div class="toolkit-cats" data-anim>
+
+      <!-- Languages -->
+      <div class="tool-cat">
+        <div class="tool-cat-header"><span class="en">Languages</span><span class="fr">Langages</span></div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#3776AB"><i class="devicon-python-plain"></i></div>
+            <span class="skill-name">Python</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon dk" style="background:#F7DF1E"><i class="devicon-javascript-plain"></i></div>
+            <span class="skill-name">JavaScript</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#3178C6"><i class="devicon-typescript-plain"></i></div>
+            <span class="skill-name">TypeScript</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#336791">SQL</div>
+            <span class="skill-name">SQL</span>
+          </div>
+        </div>
       </div>
-      <div class="tool-category">
-        <div class="tool-cat-title">Frontend</div>
-        <div class="tool-row"><span class="tool-name">Next.js</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">React Native</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">HTML/CSS</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">Tailwind CSS</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
+
+      <!-- Frontend -->
+      <div class="tool-cat">
+        <div class="tool-cat-header">Frontend</div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#1a1a1a"><i class="devicon-nextjs-plain"></i></div>
+            <span class="skill-name">Next.js</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#20232A"><i class="devicon-react-plain" style="color:#61DAFB"></i></div>
+            <span class="skill-name">React</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#E34F26"><i class="devicon-html5-plain"></i></div>
+            <span class="skill-name">HTML/CSS</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#0F172A"><i class="devicon-tailwindcss-plain" style="color:#38BDF8"></i></div>
+            <span class="skill-name">Tailwind</span>
+          </div>
+        </div>
       </div>
-      <div class="tool-category">
-        <div class="tool-cat-title">Backend</div>
-        <div class="tool-row"><span class="tool-name">Django</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">FastAPI</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">Flask</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">Node.js</span><span class="tool-stars">★<span class="grey">★★</span></span></div>
+
+      <!-- Backend -->
+      <div class="tool-cat">
+        <div class="tool-cat-header">Backend</div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#092E20"><i class="devicon-django-plain" style="color:#44B78B"></i></div>
+            <span class="skill-name">Django</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#059669"><i class="devicon-fastapi-plain"></i></div>
+            <span class="skill-name">FastAPI</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#1a1a1a"><i class="devicon-flask-original"></i></div>
+            <span class="skill-name">Flask</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#1B3A1B"><i class="devicon-nodejs-plain" style="color:#6CC24A"></i></div>
+            <span class="skill-name">Node.js</span>
+          </div>
+        </div>
       </div>
-      <div class="tool-category">
-        <div class="tool-cat-title">Databases</div>
-        <div class="tool-row"><span class="tool-name">PostgreSQL</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">MySQL</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">MongoDB</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">SQLite</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">Supabase</span><span class="tool-stars">★★★</span></div>
+
+      <!-- Databases -->
+      <div class="tool-cat">
+        <div class="tool-cat-header"><span class="en">Databases</span><span class="fr">Bases de données</span></div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#336791"><i class="devicon-postgresql-plain"></i></div>
+            <span class="skill-name">PostgreSQL</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#00618A"><i class="devicon-mysql-plain"></i></div>
+            <span class="skill-name">MySQL</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#13AA52"><i class="devicon-mongodb-plain"></i></div>
+            <span class="skill-name">MongoDB</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#003B57"><i class="devicon-sqlite-plain"></i></div>
+            <span class="skill-name">SQLite</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#1C1C1C"><i class="devicon-supabase-plain" style="color:#3ECF8E"></i></div>
+            <span class="skill-name">Supabase</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#FDB515;color:#111">TSdb</div>
+            <span class="skill-name">TimescaleDB</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#C74634"><i class="devicon-oracle-original"></i></div>
+            <span class="skill-name">Oracle</span>
+          </div>
+        </div>
       </div>
-      <div class="tool-category">
-        <div class="tool-cat-title">Big Data &amp; Streaming</div>
-        <div class="tool-row"><span class="tool-name">Apache Kafka</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">Apache Spark</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">MQTT</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">TimescaleDB</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
+
+      <!-- Big Data -->
+      <div class="tool-cat">
+        <div class="tool-cat-header">Big Data &amp; Streaming</div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#231F20"><i class="devicon-apachekafka-original"></i></div>
+            <span class="skill-name">Kafka</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#E25A1C"><i class="devicon-apachespark-original"></i></div>
+            <span class="skill-name">Spark</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#660066">MQ</div>
+            <span class="skill-name">MQTT</span>
+          </div>
+        </div>
       </div>
-      <div class="tool-category">
-        <div class="tool-cat-title">AI &amp; ML</div>
-        <div class="tool-row"><span class="tool-name">PyTorch</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">Scikit-learn</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">LangChain</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">Ollama</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">Hugging Face</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
+
+      <!-- AI & ML -->
+      <div class="tool-cat">
+        <div class="tool-cat-header">AI &amp; ML</div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#EE4C2C"><i class="devicon-pytorch-plain"></i></div>
+            <span class="skill-name">PyTorch</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#F7931E"><i class="devicon-scikitlearn-plain"></i></div>
+            <span class="skill-name">Scikit-learn</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#1C3A4A">LC</div>
+            <span class="skill-name">LangChain</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#1a1a1a;font-size:28px;line-height:1">🦙</div>
+            <span class="skill-name">Ollama</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon dk" style="background:#FFD21E;font-size:28px;line-height:1">🤗</div>
+            <span class="skill-name">HuggingFace</span>
+          </div>
+        </div>
       </div>
-      <div class="tool-category">
-        <div class="tool-cat-title">DevOps / Tools</div>
-        <div class="tool-row"><span class="tool-name">Git / GitHub</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">Docker</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">Linux</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">n8n</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
+
+      <!-- DevOps -->
+      <div class="tool-cat">
+        <div class="tool-cat-header"><span class="en">DevOps / Tools</span><span class="fr">DevOps / Outils</span></div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#F05032"><i class="devicon-git-plain"></i></div>
+            <span class="skill-name">Git</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#2496ED"><i class="devicon-docker-plain"></i></div>
+            <span class="skill-name">Docker</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#1a1a1a"><i class="devicon-linux-plain" style="color:#FCC624"></i></div>
+            <span class="skill-name">Linux</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#EA4B71;font-size:10px">n8n</div>
+            <span class="skill-name">n8n</span>
+          </div>
+        </div>
       </div>
-      <div class="tool-category">
-        <div class="tool-cat-title">Visualization</div>
-        <div class="tool-row"><span class="tool-name">Grafana</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">Power BI</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">Superset</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">Matplotlib</span><span class="tool-stars">★★★</span></div>
+
+      <!-- Visualization -->
+      <div class="tool-cat">
+        <div class="tool-cat-header"><span class="en">Visualization</span><span class="fr">Visualisation</span></div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#F46800"><i class="devicon-grafana-plain"></i></div>
+            <span class="skill-name">Grafana</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#F2C811">
+              <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3"  y="18" width="6" height="11" rx="1.5" fill="#111"/>
+                <rect x="13" y="11" width="6" height="18" rx="1.5" fill="#111" opacity=".75"/>
+                <rect x="23" y="3"  width="6" height="26" rx="1.5" fill="#111" opacity=".5"/>
+              </svg>
+            </div>
+            <span class="skill-name">Power BI</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#1A73E8;font-size:10px">SS</div>
+            <span class="skill-name">Superset</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon" style="background:#11557C"><i class="devicon-matplotlib-plain"></i></div>
+            <span class="skill-name">Matplotlib</span>
+          </div>
+        </div>
       </div>
-      <div class="tool-category">
-        <div class="tool-cat-title">Desktop</div>
-        <div class="tool-row"><span class="tool-name">PyQt6</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">PyInstaller</span><span class="tool-stars">★★★</span></div>
-        <div class="tool-row"><span class="tool-name">openpyxl</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
-        <div class="tool-row"><span class="tool-name">pyodbc</span><span class="tool-stars">★★<span class="grey">★</span></span></div>
+
+      <!-- Desktop -->
+      <div class="tool-cat">
+        <div class="tool-cat-header">Desktop</div>
+        <div class="cat-skills">
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#41CD52">Qt</div>
+            <span class="skill-name">PyQt6</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#3776AB;font-size:10px">PyI</div>
+            <span class="skill-name">PyInstaller</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#217346;font-size:9px">xlsx</div>
+            <span class="skill-name">openpyxl</span>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon skill-icon-txt" style="background:#CC2927;font-size:10px">ODB</div>
+            <span class="skill-name">pyodbc</span>
+          </div>
+        </div>
       </div>
+
     </div>
   </section>
 
@@ -1137,55 +657,40 @@
       <span class="kicker-label">04 — CONTACT · freelance · Q3 2026</span>
     </div>
     <h2 data-anim>
-      <span class="row">Got an idea?</span>
-      <span class="row">Let's <span class="it">build it<span class="accent">.</span></span></span>
+      <span class="row en">Got a project?</span>
+      <span class="row en"><span class="it">Let's talk<span class="accent">.</span></span></span>
+      <span class="row fr">Un projet en tête ?</span>
+      <span class="row fr"><span class="it">On en parle<span class="accent">.</span></span></span>
     </h2>
 
-    <div data-anim style="margin-bottom: 0;">
-      <div class="contact-sublabel">Best way to reach me</div>
+    <div data-anim>
+      <div class="contact-sublabel"><span class="en">Best way to reach me</span><span class="fr">Meilleur moyen de me joindre</span></div>
       <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;">
         <span class="contact-email">Ge.birangou.26@eigsica.ma</span>
-        <button class="copy-email">Copy email</button>
+        <button class="copy-email"><span class="en">Copy email</span><span class="fr">Copier l'email</span></button>
       </div>
     </div>
 
     <div class="channels" data-anim>
       <a href="https://github.com/gegegithub" target="_blank" rel="noopener" class="channel-card">
-        <div>
-          <div class="channel-name">GitHub</div>
-          <div class="channel-handle">@gegegithub</div>
-        </div>
+        <div><div class="channel-name">GitHub</div><div class="channel-handle">@gegegithub</div></div>
       </a>
       <a href="https://www.linkedin.com/in/georges-birangou-09ab50356" target="_blank" rel="noopener" class="channel-card">
-        <div>
-          <div class="channel-name">LinkedIn</div>
-          <div class="channel-handle">Georges Birangou</div>
-        </div>
+        <div><div class="channel-name">LinkedIn</div><div class="channel-handle">Georges Birangou</div></div>
       </a>
       <a href="mailto:Ge.birangou.26@eigsica.ma" class="channel-card">
-        <div>
-          <div class="channel-name">Email</div>
-          <div class="channel-handle">Ge.birangou.26@eigsica.ma</div>
-        </div>
+        <div><div class="channel-name">Email</div><div class="channel-handle">Ge.birangou.26@eigsica.ma</div></div>
       </a>
-      <div class="channel-card">
-        <div>
-          <div class="channel-name">QR Code</div>
-          <div class="channel-handle">Portfolio</div>
-        </div>
-        <img src="assets/qrcodefolio.png" alt="QR Portfolio" class="qr-img"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="qr-ph" style="display:none;">QR</div>
-      </div>
     </div>
 
     <div class="contact-cards" data-anim>
       <a href="assets/Georges BIRANGOU.pdf" target="_blank" class="cv-card">
-        Download my CV ↗
+        <span class="en">Download my CV ↗</span>
+        <span class="fr">Télécharger mon CV ↗</span>
       </a>
       <div class="loc-card">
-        <div class="loc-label">Based in</div>
-        Casablanca, Morocco
+        <div class="loc-label"><span class="en">Based in</span><span class="fr">Basé à</span></div>
+        <span class="en">Casablanca, Morocco</span><span class="fr">Casablanca, Maroc</span>
       </div>
     </div>
   </section>
@@ -1194,44 +699,14 @@
   <footer>
     <span>GEORGES BIRANGOU — © 2026</span>
     <div class="footer-links">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#toolkit">Toolkit</a>
+      <a href="#work"><span class="en">Work</span><span class="fr">Projets</span></a>
+      <a href="#about"><span class="en">About</span><span class="fr">À propos</span></a>
+      <a href="#toolkit"><span class="en">Toolkit</span><span class="fr">Compétences</span></a>
       <a href="mailto:Ge.birangou.26@eigsica.ma">Email</a>
-      <span>Designed &amp; built with care · v.01</span>
+      <span><span class="en">Designed &amp; built with care · v.01</span><span class="fr">Conçu &amp; développé avec soin · v.01</span></span>
     </div>
   </footer>
 
-  <script>
-    window.addEventListener('load', () => {
-      document.querySelector('.hero-bg')?.classList.add('in');
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('[data-anim]').forEach(el => observer.observe(el));
-
-    const portraitObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('in');
-      });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('.portrait').forEach(el => portraitObs.observe(el));
-
-    document.querySelectorAll('.copy-email').forEach(btn => {
-      btn.addEventListener('click', () => {
-        navigator.clipboard.writeText('Ge.birangou.26@eigsica.ma');
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy email', 2000);
-      });
-    });
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
