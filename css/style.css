@@ -243,7 +243,7 @@ h2 { font-size: clamp(44px,5.5vw,88px); font-weight: 500; line-height: .95; lett
 .proj-meta-val { font-size: 13px; font-weight: 500; color: var(--text-l); }
 .pframe { width: 100%; border-radius: 18px; border: 1px solid var(--pf-bd); box-shadow: 0 30px 60px -30px rgba(0,0,0,.3); overflow: hidden; position: relative; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
 .pframe:hover { transform: translateY(-4px); }
-.pframe img { width: 100%; height: auto; display: block; }
+.pframe img, .pframe video { width: 100%; height: auto; display: block; }
 .pframe.dark { background: #0a0a0a; }
 .pframe.pink { background: #FDE5EE; }
 .pframe-ph { width: 100%; aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
