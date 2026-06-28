@@ -401,6 +401,13 @@ h2 { font-size: clamp(44px,5.5vw,88px); font-weight: 500; line-height: .95; lett
 .cv-card:hover { background: #EAE5DA; }
 .loc-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 20px 24px; font-size: 14px; color: rgba(241,237,228,.6); }
 .loc-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(241,237,228,.35); margin-bottom: 6px; }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 48px; }
+.cta-btn { display: inline-flex; align-items: center; gap: 9px; padding: 14px 24px; border-radius: 999px; font-family: 'Geist', sans-serif; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: .2s ease; white-space: nowrap; }
+.cta-primary { background: #F1EDE4; color: #111111; border: 1px solid #F1EDE4; }
+.cta-primary:hover { background: #CCFF00; border-color: #CCFF00; }
+.cta-ghost { background: transparent; color: #F1EDE4; border: 1px solid rgba(241,237,228,.18); }
+.cta-ghost:hover { border-color: #CCFF00; color: #CCFF00; }
+.loc-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(241,237,228,.35); margin-bottom: 6px; }
 
 /* ===== FOOTER (always dark) ===== */
 footer { padding: 28px 56px; border-top: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-between; align-items: center; background: #0a0a0a; }
