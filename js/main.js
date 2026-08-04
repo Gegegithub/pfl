@@ -58,6 +58,79 @@ document.querySelectorAll('.tl-tab').forEach(tab => {
   });
 });
 
+// Terminal animation
+const termBody = document.getElementById('term-body');
+if (termBody) {
+  const steps = [
+    { type: 'cmd', prompt: '❯ ', text: 'git clone github.com/Gegegithub/ResumeRadar' },
+    { type: 'out', text: '  Cloning into \'ResumeRadar\'...' },
+    { type: 'success', text: '  ✓ Done.' },
+    { type: 'cmd', prompt: '❯ ', text: 'python main.py --model llama3.1 --top-k 5' },
+    { type: 'out', text: '  Loading Ollama model...' },
+    { type: 'out', text: '  Ranking 12 CVs...' },
+    { type: 'out', text: '  #1  Alice M.    ████████░░  84.2%' },
+    { type: 'out', text: '  #2  Jean P.     ███████░░░  71.8%' },
+    { type: 'out', text: '  #3  Sofia K.    ██████░░░░  63.4%' },
+    { type: 'success', text: '  ✓ Report saved → output/ranking.json' },
+    { type: 'cmd', prompt: '❯ ', text: 'docker compose up kafka zookeeper' },
+    { type: 'out', text: '  Starting broker on localhost:9092...' },
+    { type: 'success', text: '  ✓ Kafka ready.' },
+    { type: 'cmd', prompt: '❯ ', text: 'python stream.py --topic transactions' },
+    { type: 'out', text: '  Consuming stream...' },
+    { type: 'out', text: '  [284,807 events]  fraud: 0.17%' },
+    { type: 'success', text: '  ✓ Predictions → PostgreSQL' },
+  ];
+
+  let stepIdx = 0, charIdx = 0;
+  let currentEl = null;
+  const cursor = document.createElement('span');
+  cursor.className = 'term-cursor';
+
+  function nextStep() {
+    if (stepIdx >= steps.length) {
+      setTimeout(() => {
+        termBody.innerHTML = '';
+        stepIdx = 0; charIdx = 0; currentEl = null;
+        termBody.appendChild(cursor);
+        typeChar();
+      }, 2000);
+      return;
+    }
+    const step = steps[stepIdx];
+    const line = document.createElement('div');
+    line.className = 'term-line';
+    if (step.type === 'cmd') {
+      line.innerHTML = `<span class="prompt">${step.prompt}</span><span class="cmd"></span>`;
+      currentEl = line.querySelector('.cmd');
+    } else if (step.type === 'success') {
+      line.innerHTML = `<span class="success"></span>`;
+      currentEl = line.querySelector('.success');
+    } else {
+      line.innerHTML = `<span class="out"></span>`;
+      currentEl = line.querySelector('.out');
+    }
+    termBody.insertBefore(line, cursor);
+    charIdx = 0;
+    typeChar();
+  }
+
+  function typeChar() {
+    const step = steps[stepIdx];
+    const text = step.text;
+    const delay = step.type === 'cmd' ? 55 : 18;
+    if (charIdx < text.length) {
+      currentEl.textContent += text[charIdx++];
+      setTimeout(typeChar, delay);
+    } else {
+      stepIdx++;
+      setTimeout(nextStep, step.type === 'cmd' ? 400 : 120);
+    }
+  }
+
+  termBody.appendChild(cursor);
+  setTimeout(nextStep, 800);
+}
+
 // Copy email
 document.querySelectorAll('.copy-email').forEach(btn => {
   btn.addEventListener('click', () => {
