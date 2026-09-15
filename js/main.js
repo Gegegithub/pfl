@@ -5,6 +5,32 @@ const html     = document.documentElement;
 const themeBtn = document.getElementById('theme-btn');
 const langBtns = document.querySelectorAll('.lang-btn');
 
+// Multilingual greeting on every page arrival
+const helloLoader = document.getElementById('hello-loader');
+if (helloLoader) {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    helloLoader.remove();
+  } else {
+    const greetings = ['Bonjour', 'Hello', 'Hola', 'Ciao', 'Salam', 'こんにちは'];
+    const word = document.getElementById('hello-loader-word');
+    let greetingIndex = 0;
+    const greetingTimer = setInterval(() => {
+      greetingIndex += 1;
+      if (greetingIndex >= greetings.length) {
+        clearInterval(greetingTimer);
+        helloLoader.classList.add('done');
+        setTimeout(() => helloLoader.remove(), 650);
+        return;
+      }
+      word.style.animation = 'none';
+      word.offsetHeight;
+      word.textContent = greetings[greetingIndex];
+      word.style.animation = '';
+    }, 330);
+  }
+}
+
 // Theme
 const savedTheme = localStorage.getItem('gb-theme') || 'dark';
 html.setAttribute('data-theme', savedTheme);
@@ -55,6 +81,49 @@ document.querySelectorAll('.tl-tab').forEach(tab => {
     document.querySelectorAll('.tl-panel').forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('tl-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Accessible experience accordions, generated from the existing content
+const companyMarks = [
+  '<img src="assets/images/logo-cetim-maroc.png" alt="">',
+  '<img src="assets/images/logo-cciscs.png" alt="">'
+];
+document.querySelectorAll('#tl-exp .exp-item').forEach((item, index) => {
+  const dates = item.querySelector('.exp-dates');
+  const body = item.querySelector('.exp-body');
+  const company = body?.querySelector('.exp-company');
+  const location = body?.querySelector('.exp-location');
+  const role = body?.querySelector('.exp-role');
+  if (!dates || !body || !company || !role) return;
+
+  const detailsId = `experience-details-${index + 1}`;
+  const summary = document.createElement('button');
+  summary.className = 'exp-summary';
+  summary.type = 'button';
+  summary.setAttribute('aria-expanded', 'false');
+  summary.setAttribute('aria-controls', detailsId);
+  summary.innerHTML = `<span class="exp-logo exp-logo-${index + 1}" aria-hidden="true">${companyMarks[index] || '<span>GB</span>'}</span><span><span class="exp-summary-company">${company.innerHTML}</span><span class="exp-summary-sub"><span>${dates.innerHTML}</span><span class="exp-summary-role">${role.innerHTML}</span>${location ? `<span>${location.innerHTML}</span>` : ''}</span></span><span class="exp-chevron" aria-hidden="true"></span>`;
+
+  company.remove();
+  role.remove();
+  location?.remove();
+  dates.remove();
+  const details = document.createElement('div');
+  details.className = 'exp-details';
+  details.id = detailsId;
+  const detailsInner = document.createElement('div');
+  detailsInner.className = 'exp-details-inner';
+  while (body.firstChild) detailsInner.appendChild(body.firstChild);
+  details.appendChild(detailsInner);
+  body.remove();
+  item.classList.add('exp-accordion');
+  item.append(summary, details);
+
+  summary.addEventListener('click', () => {
+    const open = summary.getAttribute('aria-expanded') === 'true';
+    summary.setAttribute('aria-expanded', String(!open));
+    details.classList.toggle('open', !open);
   });
 });
 

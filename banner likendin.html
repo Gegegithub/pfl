@@ -1,0 +1,162 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+  .og-banner {
+    width: 1280px;
+    height: 682px;
+    background-color: #0E0E0E;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .monogram {
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 620px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    letter-spacing: -20px;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .accent-line {
+    position: absolute;
+    left: 96px;
+    top: 96px;
+    width: 2px;
+    height: 490px;
+    background: rgba(204,255,0,0.35);
+    border-radius: 1px;
+  }
+
+  .content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 124px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    align-self: flex-start;
+    background: rgba(241,237,228,0.06);
+    border: 1px solid rgba(241,237,228,0.14);
+    border-radius: 999px;
+    padding: 12px 28px 12px 22px;
+    margin-bottom: 32px;
+  }
+
+  .badge-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #CCFF00;
+    box-shadow: 0 0 8px rgba(204,255,0,0.6);
+    flex-shrink: 0;
+  }
+
+  .badge-text {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: #F1EDE4;
+  }
+
+  .name-first {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 132px;
+    font-weight: 700;
+    color: #F1EDE4;
+    line-height: 1;
+    letter-spacing: -4px;
+    margin-bottom: 6px;
+  }
+
+  .name-last {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 118px;
+    font-weight: 400;
+    font-style: italic;
+    color: #F1EDE4;
+    line-height: 1;
+    letter-spacing: -3px;
+    margin-bottom: 28px;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: rgba(204,255,0,0.5);
+    margin-bottom: 22px;
+  }
+
+  .tagline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: rgba(241,237,228,0.42);
+    line-height: 1.5;
+    max-width: 660px;
+  }
+
+  .role-label {
+    position: absolute;
+    bottom: 52px;
+    right: 96px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: rgba(241,237,228,0.22);
+    text-transform: uppercase;
+  }
+
+  .scaler { width: 100%; overflow: hidden; position: relative; }
+</style>
+
+<div class="scaler" id="scaler">
+  <div class="og-banner" id="banner">
+    <div class="monogram">GB</div>
+    <div class="accent-line"></div>
+    <div class="content">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Portfolio</span>
+      </div>
+      <div class="name-first">Georges</div>
+      <div class="name-last">Birangou.</div>
+      <div class="divider"></div>
+      <div class="tagline">"Bridging data and AI, where solid pipelines meet intelligence."</div>
+    </div>
+    <div class="role-label">AI &amp; Data Engineer</div>
+  </div>
+</div>
+
+<script>
+  function scaleBanner() {
+    const scaler = document.getElementById('scaler');
+    const banner = document.getElementById('banner');
+    const available = scaler.offsetWidth;
+    const scale = available / 1280;
+    banner.style.transform = `scale(${scale})`;
+    banner.style.transformOrigin = 'top left';
+    scaler.style.height = (682 * scale) + 'px';
+  }
+  scaleBanner();
+  window.addEventListener('resize', scaleBanner);
+</script>
