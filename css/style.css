@@ -509,7 +509,9 @@ h1 .it.hero-anim { display: inline-block; transform: translateY(20px) translateX
 }
 
 /* ===== SWAMII-INSPIRED COMPONENTS ===== */
-.projects-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; margin-bottom:72px; }
+.projects-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; margin-bottom:0; }
+.work { padding-bottom:32px; }
+.about { padding-top:64px; }
 .projects-grid .project { margin:0; min-width:0; border:1px solid var(--border-l); border-radius:20px; background:var(--surface-l); overflow:hidden; display:flex; flex-direction:column; }
 .projects-grid .project-row { order:2; display:flex; flex-direction:column; gap:16px; padding:24px; margin:0; border:0; flex:1; }
 .projects-grid .project-num { display:none; }
@@ -573,10 +575,15 @@ h1 .it.hero-anim { display: inline-block; transform: translateY(20px) translateX
 .exp-details.open { grid-template-rows:1fr; }
 .exp-details.open .exp-details-inner { padding-bottom:28px; }
 
-.hello-loader { position:fixed; inset:0; z-index:9999; display:grid; place-items:center; background:#090909; color:#F1EDE4; transition:opacity .55s ease,visibility .55s ease; }
-.hello-loader.done { opacity:0; visibility:hidden; pointer-events:none; }
-.hello-loader-word { font-family:'Instrument Serif',serif; font-style:italic; font-size:clamp(52px,9vw,120px); animation:helloSwap .28s ease; }
+.hello-loader { position:fixed; inset:0; z-index:9999; display:grid; place-items:center; background:#000; color:#F1EDE4; transform:translateY(0); transition:transform .85s cubic-bezier(.76,0,.24,1); will-change:transform; }
+.hello-loader.done { transform:translateY(-100%); pointer-events:none; }
+.hello-loader-word { display:flex; align-items:center; gap:.28em; font-family:'Geist',ui-sans-serif,sans-serif; font-style:normal; font-size:clamp(52px,9vw,120px); animation:helloSwap .28s ease; }
+.hello-loader-word::before { content:''; width:.18em; height:.18em; flex:0 0 auto; border-radius:50%; background:#F1EDE4; }
+body.hello-active { overflow:hidden; }
+body.hello-active .nav,body.hello-active .hero { opacity:0; transform:translateY(34px); }
+body.site-ready .nav,body.site-ready .hero { animation:siteReveal .8s .12s cubic-bezier(.16,1,.3,1) both; }
 @keyframes helloSwap { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+@keyframes siteReveal { from { opacity:0; transform:translateY(34px); } to { opacity:1; transform:none; } }
 .social-dock { position:fixed; z-index:40; left:50%; bottom:20px; transform:translateX(-50%); display:flex; align-items:center; gap:8px; padding:9px 13px; border:1px solid rgba(255,255,255,.16); border-radius:999px; background:rgba(12,12,12,.82); box-shadow:0 16px 45px rgba(0,0,0,.25); backdrop-filter:blur(16px); }
 .social-dock a { width:42px; height:42px; border-radius:50%; display:grid; place-items:center; background:rgba(255,255,255,.1); transition:transform .2s,background .2s; }
 .social-dock a:hover { transform:translateY(-3px); background:rgba(255,255,255,.18); }
@@ -592,4 +599,67 @@ h1 .it.hero-anim { display: inline-block; transform: translateY(20px) translateX
   .exp-logo { width:52px; height:48px; }
   .exp-summary-company { font-size:17px; }
   .exp-details-inner { padding-left:72px; padding-right:12px; }
+}
+
+/* ===== COMPACT SECTION RHYTHM ===== */
+.work,.about,.toolkit,.contact { padding-top:52px; padding-bottom:52px; }
+.work-header { margin-bottom:0; }
+.kicker { margin-bottom:26px; }
+h2 { margin-bottom:44px; }
+.about-header-row { margin-bottom:28px; }
+.about-divider { margin-bottom:38px; }
+.about-left .quick-cards { margin-bottom:38px; }
+.channels { margin-top:34px; margin-bottom:34px; }
+.contact-actions { margin-top:34px; }
+
+@media (max-width:720px) {
+  .work,.about,.toolkit,.contact { padding-top:42px; padding-bottom:42px; }
+  .kicker { margin-bottom:22px; }
+  h2 { margin-bottom:34px; }
+  .about-divider { margin-bottom:30px; }
+}
+
+/* ===== COMPACT LOGO SKILL CHIPS ===== */
+.toolkit-cats { display:flex; flex-direction:column; gap:30px; }
+.tool-cat { padding:0; border:0; border-radius:0; background:transparent; }
+.tool-cat-header { margin:0 0 12px; padding:0; border:0; font-size:10px; }
+.cat-skills { display:flex; flex-wrap:wrap; gap:10px; }
+.skill-badge { min-height:50px; display:inline-flex; flex-direction:row; align-items:center; gap:10px; padding:9px 16px; border:1px solid rgba(255,255,255,.045); border-radius:11px; background:#111; }
+.skill-badge:hover { background:#171717; border-color:rgba(255,255,255,.1); }
+.skill-icon { width:28px; height:28px; flex:0 0 28px; border-radius:0; background:transparent !important; font-size:23px; }
+.skill-icon i { font-size:23px; }
+.skill-icon-txt { background:transparent !important; font-size:10px !important; color:var(--blue); }
+.skill-name { color:#F1EDE4; font-family:'Geist',sans-serif; font-size:14px; font-weight:600; letter-spacing:0; text-transform:none; text-align:left; white-space:nowrap; }
+.skill-icon .devicon-python-plain { color:#3776AB; }
+.skill-icon .devicon-javascript-plain { color:#F7DF1E; }
+.skill-icon .devicon-typescript-plain { color:#3178C6; }
+.skill-icon .devicon-java-plain { color:#ED8B00; }
+.skill-icon .devicon-nextjs-plain { color:#F1EDE4; }
+.skill-icon .devicon-html5-plain { color:#E34F26; }
+.skill-icon .devicon-django-plain { color:#44B78B !important; }
+.skill-icon .devicon-fastapi-plain { color:#009688; }
+.skill-icon .devicon-flask-original { color:#F1EDE4; }
+.skill-icon .devicon-postgresql-plain { color:#4169E1; }
+.skill-icon .devicon-mysql-plain { color:#4479A1; }
+.skill-icon .devicon-mongodb-plain { color:#47A248; }
+.skill-icon .devicon-sqlite-plain { color:#44A2D4; }
+.skill-icon .devicon-apachekafka-original { color:#F1EDE4; }
+.skill-icon .devicon-git-plain { color:#F05032; }
+.skill-icon .devicon-docker-plain { color:#2496ED; }
+.skill-icon .devicon-grafana-plain { color:#F46800; }
+.skill-icon .devicon-matplotlib-plain { color:#65BAEA; }
+[data-theme="light"] .skill-badge { background:#fff; border-color:rgba(17,17,17,.08); }
+[data-theme="light"] .skill-badge:hover { background:#f7f4ed; }
+[data-theme="light"] .skill-name { color:#111; }
+[data-theme="light"] .skill-icon .devicon-nextjs-plain,
+[data-theme="light"] .skill-icon .devicon-flask-original,
+[data-theme="light"] .skill-icon .devicon-apachekafka-original { color:#111; }
+
+@media (max-width:720px) {
+  .toolkit-cats { gap:24px; }
+  .cat-skills { gap:8px; }
+  .skill-badge { min-height:44px; padding:7px 11px; gap:8px; }
+  .skill-icon { width:24px; height:24px; flex-basis:24px; }
+  .skill-icon i { font-size:20px; }
+  .skill-name { font-size:12px; }
 }

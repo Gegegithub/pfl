@@ -12,7 +12,8 @@ if (helloLoader) {
   if (reduceMotion) {
     helloLoader.remove();
   } else {
-    const greetings = ['Bonjour', 'Hello', 'Hola', 'Ciao', 'Salam', 'こんにちは'];
+    document.body.classList.add('hello-active');
+    const greetings = ['Bonjour', 'Hello', 'Hola', 'Salam', 'Olá', 'こんにちは'];
     const word = document.getElementById('hello-loader-word');
     let greetingIndex = 0;
     const greetingTimer = setInterval(() => {
@@ -20,7 +21,9 @@ if (helloLoader) {
       if (greetingIndex >= greetings.length) {
         clearInterval(greetingTimer);
         helloLoader.classList.add('done');
-        setTimeout(() => helloLoader.remove(), 650);
+        document.body.classList.remove('hello-active');
+        document.body.classList.add('site-ready');
+        setTimeout(() => helloLoader.remove(), 950);
         return;
       }
       word.style.animation = 'none';
@@ -203,7 +206,7 @@ if (termBody) {
 // Copy email
 document.querySelectorAll('.copy-email').forEach(btn => {
   btn.addEventListener('click', () => {
-    navigator.clipboard.writeText('Ge.birangou.26@eigsica.ma');
+    navigator.clipboard.writeText('ge.birangou.26@edu.eigsi.org');
     const lang = html.getAttribute('data-lang');
     const original = btn.innerHTML;
     btn.textContent = lang === 'fr' ? 'Copié !' : 'Copied!';
