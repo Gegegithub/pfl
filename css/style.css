@@ -621,6 +621,15 @@ h2 { margin-bottom:44px; }
 
 /* ===== COMPACT LOGO SKILL CHIPS ===== */
 .toolkit-cats { display:flex; flex-direction:column; gap:30px; }
+.toolkit-cats .tool-cat:nth-child(1) { order:1; }
+.toolkit-cats .tool-cat:nth-child(6) { order:2; }
+.toolkit-cats .tool-cat:nth-child(8) { order:3; }
+.toolkit-cats .tool-cat:nth-child(4) { order:4; }
+.toolkit-cats .tool-cat:nth-child(5) { order:5; }
+.toolkit-cats .tool-cat:nth-child(2) { order:6; }
+.toolkit-cats .tool-cat:nth-child(3) { order:7; }
+.toolkit-cats .tool-cat:nth-child(7) { order:8; }
+.toolkit-cats .tool-cat:nth-child(9) { order:9; }
 .tool-cat { padding:0; border:0; border-radius:0; background:transparent; }
 .tool-cat-header { margin:0 0 12px; padding:0; border:0; font-size:10px; }
 .cat-skills { display:flex; flex-wrap:wrap; gap:10px; }
@@ -634,6 +643,9 @@ h2 { margin-bottom:44px; }
 .skill-icon .devicon-javascript-plain { color:#F7DF1E; }
 .skill-icon .devicon-typescript-plain { color:#3178C6; }
 .skill-icon .devicon-java-plain { color:#ED8B00; }
+.skill-icon .devicon-pandas-plain { color:#E70488; }
+.skill-icon .devicon-numpy-plain { color:#4D77CF; }
+.skill-icon .devicon-jupyter-plain { color:#F37626; }
 .skill-icon .devicon-nextjs-plain { color:#F1EDE4; }
 .skill-icon .devicon-html5-plain { color:#E34F26; }
 .skill-icon .devicon-django-plain { color:#44B78B !important; }
