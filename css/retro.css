@@ -1,0 +1,103 @@
+/* Paper, ink and warm print colors. Content remains in index.html. */
+:root, [data-theme="light"] {
+  --bg-l:#f2e7cc; --bg-d:#eadcba; --bg-nav:#f2e7cc;
+  --text-l:#342216; --text-l2:#614b37; --muted:#80694f;
+  --border-l:#cdbb99; --border-d:#cdbb99;
+  --surface-l:#fbf3de; --surface-l2:#e8d9b8;
+  --chip-bg:#eee0c1; --chip-bd:#cdbb99; --chip-text:#614b37;
+  --blue:#be4d27; --blue-soft:#be4d27; --cream:#f2e7cc;
+  --card-bg:#fbf3de; --card-bd:#cdbb99;
+  --btn-p-bg:#342216; --btn-p-text:#fff4dd;
+}
+html { scroll-behavior:smooth; scroll-padding-top:24px; }
+body.retro { background:#f2e7cc; color:#342216; }
+.retro::before { display:none; }
+.retro button,.retro a { -webkit-tap-highlight-color:transparent; }
+.retro :focus-visible { outline:3px solid #be4d27; outline-offset:5px; }
+.retro .nav { background:#f2e7cc; border-bottom:1px solid #cdbb99; padding:24px 5%; }
+.retro .nav a { font-size:12px; text-transform:uppercase; letter-spacing:.06em; }
+.retro .theme-btn { display:none; }
+.retro .hero { min-height:720px; padding:90px 5% 115px; position:relative; background-color:#f2e7cc; background-image:linear-gradient(#6f543410 1px,transparent 1px),linear-gradient(90deg,#6f543410 1px,transparent 1px); background-size:24px 24px; }
+.retro .hero-grid { display:block; }
+.retro .hero-left { position:relative; z-index:2; }
+.retro .hero-right,.retro .lab-overline { display:none; }
+.retro .hero h1 { max-width:1200px; font-family:'Geist',sans-serif; font-weight:600; font-size:clamp(52px,7.3vw,112px); line-height:1.06; letter-spacing:-.055em; color:#342216; }
+.retro .hero h1 .row:last-child { color:#a64b2a; font-size:.72em; margin-top:12px; }
+.retro .hero .hero-quote { max-width:620px; color:#614b37; font-family:'Geist',sans-serif; font-size:18px; margin-top:30px; }
+.retro .hero-cv-link { background:#342216; color:#fff4dd; border:1px solid #342216; border-radius:4px; padding:14px 22px; box-shadow:3px 3px 0 #bbaa87; }
+.retro .hero-cv-link:hover { background:#a64b2a; border-color:#a64b2a; }
+.retro .ticker { background:#e8d8b6; border-color:#cdbb99; }
+.retro .ticker span { color:#705038; }
+.retro .work,.retro .about,.retro .toolkit,.retro .contact { padding:65px 5%; color:#342216; background:#f2e7cc; }
+.retro .about { background:#ecdfc2; border-block:1px solid #cdbb99; }
+.retro .about::before,.retro .contact::before { display:none; }
+.retro h2 { font-family:'Geist',sans-serif; font-weight:600; color:#342216; font-size:clamp(40px,5.2vw,78px); line-height:1.03; letter-spacing:-.045em; margin-bottom:36px; }
+.retro h2 .it { font-family:inherit; font-style:normal; }
+.retro .kicker-label { color:#80694f; }
+.retro .ln { background:#a64b2a; }
+.retro .projects-grid { gap:24px; }
+.retro .projects-grid .project { background:#fbf3de; border:1px solid #bba582; border-radius:7px; box-shadow:5px 6px 0 #dfcfae; transition:transform .2s,box-shadow .2s; }
+.retro .projects-grid .project:hover { transform:translateY(-5px); box-shadow:6px 11px 0 #dfcfae; }
+.retro .projects-grid .project-row { padding:22px; gap:15px; }
+.retro .projects-grid .project-num { display:block; font-size:10px; color:#967452; }
+.retro .projects-grid .project-title { font-family:'Geist',sans-serif; font-weight:600; font-size:27px; color:#342216; }
+.retro .project-desc { color:#68513b; font-size:14px; }
+.retro .pframe { border-bottom:1px solid #bba582; background:#e5d4b0; }
+.retro .pbadge { color:#342216; background:#f2e7cc; border:1px solid #bba582; border-radius:2px; }
+.retro .chip,.retro .chip.b { color:#715032; border-color:#d2bb96; background:#efe0c1; border-radius:3px; }
+.retro .project-actions .btn-pill { background:#f5e9cc; border:1px solid #bba582; color:#342216; border-radius:4px; box-shadow:0 3px 0 #d1bd98; font-size:12px; }
+.retro .project-actions .btn-pill:hover { background:#342216; color:#fff4dd; border-color:#342216; }
+.retro .experiment-flow { padding:12px 0; border-block:1px dashed #cdbb99; font-size:11px; color:#715032; display:flex; flex-wrap:wrap; gap:10px; }
+.retro .experiment-flow small { display:block; color:#a64b2a; font:9px 'JetBrains Mono',monospace; }
+.retro .experiment-flow i { align-self:center; }
+.retro .about-est,.retro .about-loc,.retro .bio,.retro .qcard-label { color:#80694f; }
+.retro .bio-lead,.retro .bio-lead strong,.retro .qcard-val { color:#342216; }
+.retro .qcard { background:#f6ecd6; border-color:#cdbb99; border-radius:4px; }
+.retro .tl-tabs { border-color:#cdbb99; }
+.retro .tl-tab { color:#80694f; }
+.retro .tl-tab.active { color:#a64b2a; border-color:#a64b2a; }
+.retro .exp-item.exp-accordion,.retro .exp-item.exp-accordion:first-child { border-color:#cdbb99; }
+.retro .exp-summary { color:#342216; }
+.retro .exp-summary:hover { background:#e5d5b5; }
+.retro .exp-summary-company { font-family:'Geist',sans-serif; }
+.retro .exp-summary-sub,.retro .exp-chevron,.retro .exp-bullets { color:#71583e; }
+.retro .exp-summary-role { border-color:#c5ad86; border-radius:3px; }
+.retro .exp-bullets li { color:#71583e; }
+.retro .exp-logo { border-color:#c5ad86; }
+.retro .cert-card { background:#fbf3de; border-color:#cdbb99; border-radius:5px; }
+.retro .cert-title { color:#342216; }
+.retro .cert-year { color:#80694f; }
+.retro .cert-link { color:#a64b2a; }
+.retro .research-pipeline { display:grid; grid-template-columns:repeat(5,1fr); border:1px solid #c5ad86; margin-bottom:36px; background:#ede0c1; border-radius:5px; overflow:hidden; }
+.retro .pipeline-step { padding:20px 14px; display:flex; flex-direction:column; gap:10px; }
+.retro .pipeline-step+.pipeline-step { border-left:1px dashed #c5ad86; }
+.retro .step-index { position:static; width:28px; height:28px; flex-shrink:0; font:11px 'JetBrains Mono',monospace; color:#fff4dd; background:#61452e; border:1px solid #61452e; }
+.retro .pipeline-step strong { color:#342216; font-weight:600; }
+.retro .pipeline-step small { font-size:11px; color:#614b37; }
+.retro .pipeline-step::before,.retro .pipeline-step.active::after { display:none; }
+.retro .pipeline-step.active { background:#e6d2ad; }
+.retro .pipeline-step.active .step-index { color:#fff4dd; background:#8f3e22; border-color:#8f3e22; box-shadow:none; }
+.retro .toolkit-cats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+.retro .tool-cat { background:#fbf3de; border:1px solid #c5ad86; border-radius:4px; padding:24px; box-shadow:4px 4px 0 #e0cfae; }
+.retro .tool-cat-header { color:#a64b2a; border-bottom:1px dashed #cdbb99; padding-bottom:14px; }
+.retro .skill-badge { background:#f1e4c8; border-color:#dfcda9; border-radius:4px; }
+.retro .skill-name { color:#342216; }
+.retro .skill-icon-txt { color:#8f4f2e; }
+.retro .contact { background:#e7d6b3; border-top:1px solid #c5ad86; }
+.retro .contact h2,.retro .contact-email,.retro .contact .ln { color:#342216; }
+.retro .contact .kicker-label,.retro .contact-sublabel,.retro .loc-label { color:#80694f; }
+.retro .copy-email,.retro .channel-card,.retro .loc-card { color:#342216; background:#f2e7cc; border-color:#c5ad86; border-radius:4px; }
+.retro .channel-handle { color:#80694f; overflow-wrap:anywhere; }
+.retro .cv-card { color:#fff4dd; background:#342216; border-radius:4px; }
+.retro .contact-email { overflow-wrap:anywhere; }
+.retro footer { background:#dcc7a0; border-color:#c5ad86; padding-bottom:100px; }
+.retro footer span,.retro footer a { color:#71583e; }
+.retro .social-dock { background:#f8eed7ed; border-color:#bba582; box-shadow:0 5px 0 #baa27c60; }
+.retro .social-dock a { background:#e6d4af; }
+.retro .social-dock svg { fill:#342216; }
+.retro .hello-loader { background:#f2e7cc; color:#342216; }
+.retro .hello-loader-word { font-family:'Geist',sans-serif; }
+.retro .hello-loader-word::before { background:#a64b2a; }
+@media(max-width:900px) { .retro .research-pipeline { grid-template-columns:1fr; } .retro .pipeline-step+.pipeline-step { border-left:0; border-top:1px dashed #c5ad86; } .retro .pipeline-step { flex-direction:row; flex-wrap:wrap; align-items:center; } }
+@media(max-width:720px) { .retro .hero { min-height:580px; padding:60px 24px 100px; } .retro .hero h1 { font-size:clamp(40px,10vw,65px); } .retro .hero .hero-quote { font-size:15px; } .retro .work,.retro .about,.retro .toolkit,.retro .contact { padding:44px 24px; } .retro .toolkit-cats { grid-template-columns:1fr; } .retro .channels { grid-template-columns:1fr; } }
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .retro .track { animation:none; } }

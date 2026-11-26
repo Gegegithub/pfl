@@ -35,7 +35,7 @@ if (helloLoader) {
 }
 
 // Theme
-const savedTheme = localStorage.getItem('gb-theme') || 'dark';
+const savedTheme = document.body.classList.contains('retro') ? 'light' : (localStorage.getItem('gb-theme') || 'dark');
 html.setAttribute('data-theme', savedTheme);
 themeBtn.innerHTML = savedTheme === 'dark' ? SUN : MOON;
 
@@ -213,3 +213,105 @@ document.querySelectorAll('.copy-email').forEach(btn => {
     setTimeout(() => btn.innerHTML = original, 2000);
   });
 });
+
+// Data Lab — interactive clustering experiment
+const dataCanvas = document.getElementById('data-canvas');
+if (dataCanvas && document.body.classList.contains('data-lab')) {
+  const ctx = dataCanvas.getContext('2d');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const palette = ['#b8ff3d', '#64d8ff', '#9f82ff'];
+  const points = Array.from({ length: 120 }, (_, index) => {
+    const cluster = index % 3;
+    const angle = index * 2.399963 + cluster * .7;
+    const radius = 18 + ((index * 29) % 100) * .62;
+    return {
+      cluster,
+      seedX: ((index * 47) % 101) / 100,
+      seedY: ((index * 71) % 103) / 102,
+      angle,
+      radius,
+      size: 1.15 + (index % 4) * .35
+    };
+  });
+  const pointer = { x: -999, y: -999 };
+  let startedAt = performance.now();
+  let frameId;
+
+  function resizeLabCanvas() {
+    const rect = dataCanvas.getBoundingClientRect();
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    dataCanvas.width = Math.max(1, Math.round(rect.width * ratio));
+    dataCanvas.height = Math.max(1, Math.round(rect.height * ratio));
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+
+  function drawLab(now) {
+    const width = dataCanvas.clientWidth;
+    const height = dataCanvas.clientHeight;
+    if (!width || !height) return;
+    ctx.clearRect(0, 0, width, height);
+    const progress = reducedMotion ? 1 : Math.min(1, (now - startedAt) / 2100);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const centers = [
+      [width * .29, height * .62],
+      [width * .56, height * .31],
+      [width * .72, height * .68]
+    ];
+
+    points.forEach((point, index) => {
+      const center = centers[point.cluster];
+      const targetX = center[0] + Math.cos(point.angle) * point.radius * (width / 560);
+      const targetY = center[1] + Math.sin(point.angle) * point.radius * .62 * (height / 410);
+      let x = point.seedX * width * (1 - ease) + targetX * ease;
+      let y = point.seedY * height * (1 - ease) + targetY * ease;
+      const dx = x - pointer.x;
+      const dy = y - pointer.y;
+      const distance = Math.hypot(dx, dy);
+      if (distance < 75) {
+        const force = (75 - distance) / 75;
+        x += (dx / Math.max(distance, 1)) * force * 15;
+        y += (dy / Math.max(distance, 1)) * force * 15;
+      }
+      const pulse = reducedMotion ? 0 : Math.sin(now * .0015 + index) * .25;
+      ctx.beginPath();
+      ctx.arc(x, y, point.size + pulse, 0, Math.PI * 2);
+      ctx.fillStyle = palette[point.cluster];
+      ctx.globalAlpha = .48 + (index % 5) * .09;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+
+    centers.forEach((center, index) => {
+      ctx.beginPath();
+      ctx.arc(center[0], center[1], 10, 0, Math.PI * 2);
+      ctx.strokeStyle = palette[index];
+      ctx.globalAlpha = .42;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(center[0], center[1], 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = palette[index];
+      ctx.globalAlpha = 1;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    if (!reducedMotion) frameId = requestAnimationFrame(drawLab);
+  }
+
+  dataCanvas.addEventListener('pointermove', event => {
+    const rect = dataCanvas.getBoundingClientRect();
+    pointer.x = event.clientX - rect.left;
+    pointer.y = event.clientY - rect.top;
+  });
+  dataCanvas.addEventListener('pointerleave', () => {
+    pointer.x = -999;
+    pointer.y = -999;
+  });
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(frameId);
+    resizeLabCanvas();
+    startedAt = performance.now() - 2100;
+    drawLab(performance.now());
+  });
+  resizeLabCanvas();
+  drawLab(performance.now());
+}

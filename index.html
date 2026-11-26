@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-lang="en">
+<html lang="en" data-theme="light" data-lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,8 +20,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/retro.css">
 </head>
-<body>
+<body class="retro">
 
   <div class="hello-loader" id="hello-loader" aria-hidden="true">
     <div class="hello-loader-word" id="hello-loader-word">Bonjour</div>
@@ -52,6 +53,7 @@
 
     <div class="hero-grid">
       <div class="hero-left">
+        <div class="lab-overline hero-anim d1"><span class="lab-pulse"></span><span>GB / DATA LAB</span><span class="lab-coordinate">33.5731° N · 7.5898° W</span></div>
         <h1 class="hero-anim d1 hero-intro">
           <span class="row"><span class="en">Hi, I'm Georges</span><span class="fr">Moi, c'est Georges</span></span>
           <span class="row"><span class="en">Data. AI. Impact.</span><span class="fr">Data. IA. Impact.</span></span>
@@ -102,21 +104,14 @@
         </div>
       </div>
 
-      <div class="hero-right">
-        <div class="data-flow" aria-label="Data to AI workflow">
-          <div class="flow-heading">
-            <span class="flow-eyebrow"><span class="en">CURRENT FOCUS</span><span class="fr">FOCUS ACTUEL</span></span>
-            <span class="flow-live"><i></i><span class="en">Building</span><span class="fr">En construction</span></span>
-          </div>
-          <div class="flow-title"><span class="en">From raw data<br>to useful intelligence.</span><span class="fr">De la donnée brute<br>à l'intelligence utile.</span></div>
-          <div class="flow-pipeline" aria-hidden="true">
-            <div class="flow-node"><span class="flow-icon">01</span><strong>Sources</strong><small>Excel · APIs · SQL</small></div>
-            <span class="flow-arrow"><i></i></span>
-            <div class="flow-node active"><span class="flow-icon">02</span><strong>Pipeline</strong><small>ETL · Streaming</small></div>
-            <span class="flow-arrow"><i></i></span>
-            <div class="flow-node"><span class="flow-icon">03</span><strong>AI</strong><small>RAG · LLM · ML</small></div>
-          </div>
-          <div class="flow-footer"><span>Python</span><span>Kafka</span><span>PostgreSQL</span><span>LangChain</span></div>
+      <div class="hero-right" aria-label="Interactive data clustering visualization">
+        <div class="lab-visual hero-anim d2">
+          <div class="lab-visual-head"><span>LIVE EXPERIMENT / 01</span><span class="lab-state"><i></i> CLUSTERING</span></div>
+          <canvas id="data-canvas" aria-hidden="true"></canvas>
+          <div class="lab-axis lab-axis-y">FEATURE 02</div>
+          <div class="lab-axis lab-axis-x">FEATURE 01</div>
+          <div class="lab-legend"><span><i class="legend-a"></i> SIGNAL A</span><span><i class="legend-b"></i> SIGNAL B</span><span><i class="legend-c"></i> SIGNAL C</span></div>
+          <div class="lab-readout"><span><b id="lab-samples">120</b> samples</span><span><b>03</b> clusters</span><span><b>0.91</b> score</span></div>
         </div>
       </div>
 
@@ -182,6 +177,7 @@
           <span class="en">A free ATS-oriented CV builder. Users fill in a form, reorder sections via drag & drop, and export a clean PDF in one click. A CV library lets you save and manage multiple versions.</span>
           <span class="fr">Un builder de CV gratuit orienté ATS. L'utilisateur remplit un formulaire, réorganise les sections par drag & drop, et exporte un PDF propre en un clic. Une CVthèque permet de sauvegarder et gérer plusieurs versions.</span>
         </p>
+        <div class="experiment-flow" aria-label="Project workflow"><span><small>INPUT</small>Structured profile</span><i>→</i><span><small>PROCESS</small>ATS formatting</span><i>→</i><span><small>OUTPUT</small>Ready-to-send PDF</span></div>
         <div class="project-right">
           <div class="proj-meta-row">
             <span class="proj-meta-key">ROLE</span>
@@ -221,6 +217,7 @@
           <span class="en">A system that analyzes a stack of CVs and automatically ranks them against a target job description, powered by AI. The recruiter uploads their CVs, pastes the job description, and the AI does the rest.</span>
           <span class="fr">Un système permettant d'analyser une pile de CVs et de les classer automatiquement selon un poste ciblé, grâce à l'intelligence artificielle. Le recruteur upload ses CVs, colle la description du poste et l'IA fait le reste.</span>
         </p>
+        <div class="experiment-flow" aria-label="Project workflow"><span><small>INPUT</small>CVs + job offer</span><i>→</i><span><small>MODEL</small>Local LLM ranking</span><i>→</i><span><small>OUTPUT</small>Prioritized shortlist</span></div>
         <div class="project-right">
           <div class="proj-meta-row">
             <span class="proj-meta-key">ROLE</span>
@@ -260,6 +257,7 @@
           <span class="en">A RAG pipeline built to query large document collections: legal contracts, research papers, financial reports. Documents are chunked, embedded via text-embedding-004 and stored in pgvector. Natural language queries retrieve the top relevant chunks and pass them to Gemini Flash to generate a sourced answer.</span>
           <span class="fr">Un pipeline RAG conçu pour interroger des collections de documents volumineuses : contrats, articles de recherche, rapports financiers. Les documents sont découpés, vectorisés via text-embedding-004 et stockés dans pgvector. Les requêtes en langage naturel récupèrent les chunks pertinents et les passent à Gemini Flash pour générer une réponse sourcée.</span>
         </p>
+        <div class="experiment-flow" aria-label="Project workflow"><span><small>INPUT</small>PDFs + images</span><i>→</i><span><small>MODEL</small>Embeddings + RAG</span><i>→</i><span><small>OUTPUT</small>Sourced answers</span></div>
         <div class="project-right">
           <div class="proj-meta-row">
             <span class="proj-meta-key">ROLE</span>
@@ -300,7 +298,6 @@
         <span class="row fr"><span class="it">à l'intelligence<span class="accent">.</span></span></span>
       </h2>
       <div class="about-meta-top">
-        <span class="about-est">est. 2003</span>
         <span class="about-loc">Casablanca, Morocco · GMT+1</span>
       </div>
     </div>
@@ -677,29 +674,6 @@
           <div class="skill-badge">
             <div class="skill-icon" style="background:#11557C"><i class="devicon-matplotlib-plain"></i></div>
             <span class="skill-name">Matplotlib</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Desktop -->
-      <div class="tool-cat">
-        <div class="tool-cat-header">Desktop</div>
-        <div class="cat-skills">
-          <div class="skill-badge">
-            <div class="skill-icon skill-icon-txt" style="background:#41CD52">Qt</div>
-            <span class="skill-name">PyQt6</span>
-          </div>
-          <div class="skill-badge">
-            <div class="skill-icon skill-icon-txt" style="background:#3776AB;font-size:10px">PyI</div>
-            <span class="skill-name">PyInstaller</span>
-          </div>
-          <div class="skill-badge">
-            <div class="skill-icon skill-icon-txt" style="background:#217346;font-size:9px">xlsx</div>
-            <span class="skill-name">openpyxl</span>
-          </div>
-          <div class="skill-badge">
-            <div class="skill-icon skill-icon-txt" style="background:#CC2927;font-size:10px">ODB</div>
-            <span class="skill-name">pyodbc</span>
           </div>
         </div>
       </div>
